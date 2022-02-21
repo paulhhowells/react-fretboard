@@ -1,0 +1,30 @@
+.fretboard {}
+
+.fretboard__blank {
+	fill: #eee;
+}
+.fretboard__frets {}
+.fretboard__fret {
+	fill: #fff;
+}
+
+.fretboard__note {}
+.fretboard__note > circle {
+	fill: #fff;
+}
+.fretboard__note > text {
+	fill: #222;
+	font-size: 0.75rem;
+}
+
+.fretboard__string {
+	fill: #f5f5f5;
+}
+
+.fretboard__marker {
+	fill: #ccc;
+}
+
+.fretboard__nut {
+	fill: #999;
+}
