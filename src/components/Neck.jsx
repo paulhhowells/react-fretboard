@@ -6,10 +6,10 @@ import { useFretboard } from '../hooks';
 
 export default function Neck ({
 	// Includes the nut as fret 0, so for 1 nut + 24 frets use 25.
-	numberOfFrets = 25,
+	numberOfFrets = 13,
 
 	numberOfStrings = 6,
-	fretMode = FRET_MODE.RULE_OF_EIGHTEEN,
+	fretMode = FRET_MODE.EVEN,
 	openStringPitches,
 	notes,
 }) {
