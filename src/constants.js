@@ -5,8 +5,8 @@ export const FRET_WIDTH = 2;
 export const NUT_WIDTH = 4;
 export const NUT_X = FRETBOARD_LEFT_PAD + FRET_WIDTH - NUT_WIDTH;
 export const STRING_TO_STRING_VERTICAL_OFFSET = 20;
-export const STRING_TO_EDGE_OF_FRETBOARD = 20;
-export const FRET_MODE = {
+
+export const FRET_MODE = Object.freeze({
 	EVEN: 'EVEN',
 	RULE_OF_EIGHTEEN: 'RULE_OF_EIGHTEEN',
-};
+});
