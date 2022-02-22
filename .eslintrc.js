@@ -53,6 +53,7 @@ module.exports = {
 		'space-before-blocks': 'error', // before block curly brace
 		'space-before-function-paren': [ 'error', 'always' ],
 		'space-infix-ops': [ 'error', { 'int32Hint': false } ],
+		'space-in-parens': [ 'error', 'never' ],
 		'space-unary-ops': [
 			'error',
 			{
