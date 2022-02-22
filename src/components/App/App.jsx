@@ -1,5 +1,5 @@
 import React from 'react';
-import Neck from './components/Neck';
+import Neck from '../Neck';
 
 function App () {
 	const openStringPitches = [ 4, 9, 2, 7, 11, 4 ].reverse(); // E A D G B E
