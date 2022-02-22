@@ -5,8 +5,6 @@ import { FRET_MODE } from '../constants';
 import { useFretboard } from '../hooks';
 
 export default function Neck ({
-	// TODO: move into UI state:
-
 	// Includes the nut as fret 0, so for 1 nut + 24 frets use 25.
 	numberOfFrets = 25,
 
