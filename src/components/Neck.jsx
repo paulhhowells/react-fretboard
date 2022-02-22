@@ -2,7 +2,7 @@ import React from 'react';
 import Notes from './Notes';
 import Fretboard from './Fretboard';
 import { FRET_MODE } from '../constants';
-import { useFretboard } from '../hooks/useFretboard';
+import { useFretboard } from '../hooks';
 
 export default function Neck ({
 	// TODO: move into UI state:
