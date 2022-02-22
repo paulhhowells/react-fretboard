@@ -9,6 +9,7 @@ module.exports = {
 		'arrow-parens': [ 'error', 'as-needed' ],
 		'brace-style': [ 'error', '1tbs' ], // else stroustrup
 		'comma-dangle': [ 'error', 'only-multiline' ],
+		'comma-style': [ 'error', 'last' ],
 		'linebreak-style': 'off', // git checks out LF as CRLF on windows
 
 		'quotes': [ 'error', 'single', { 'allowTemplateLiterals': true } ],
@@ -17,6 +18,7 @@ module.exports = {
 
 		// Spacing
 		'array-bracket-spacing': [ 'error', 'always' ],
+		'comma-spacing': [ 'error', { 'before': false, 'after': true } ],
 		'func-call-spacing': [ 'error', 'never' ], // no space before parentheses when a function is called
 		'keyword-spacing': [ 'error', { 'before': true, 'after': true } ], // avoid `if(foo){`
 		'key-spacing': [ 'error', { 'beforeColon': false, 'afterColon': true } ],
