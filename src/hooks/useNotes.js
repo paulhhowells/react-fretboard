@@ -5,7 +5,6 @@ const initialNoteState = {};
 export function useNotes () {
 	const { state, dispatch } = React.useReducer(noteReducer, initialNoteState);
 
-
 	const openStringPitches = [ 4, 9, 2, 7, 11, 4 ].reverse(); // E A D G B E
 
 	const scale = [
