@@ -11,6 +11,11 @@
 /* .fretboard__note {} */
 .fretboard__note > circle {
 	fill: #fff;
+	stroke: #bbb;
+	stroke-width: 0.125;
+}
+.fretboard__note--root > circle {
+	stroke: #c00;
 }
 .fretboard__note > text {
 	fill: #222;
