@@ -1,14 +1,14 @@
-.fretboard {}
+/* .fretboard {} */
 
 .fretboard__blank {
 	fill: #eee;
 }
-.fretboard__frets {}
+/* .fretboard__frets {} */
 .fretboard__fret {
 	fill: #fff;
 }
 
-.fretboard__note {}
+/* .fretboard__note {} */
 .fretboard__note > circle {
 	fill: #fff;
 }
