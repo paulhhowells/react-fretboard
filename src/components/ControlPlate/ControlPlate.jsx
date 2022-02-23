@@ -1,7 +1,23 @@
-export default function ControlPlate () {
+import React from 'react';
+import KeySelector from './KeySelector';
+
+export default function ControlPlate ({
+	keyType,
+	rootNote,
+	rootNoteChoices,
+	setKeyType,
+	setRootNote,
+}) {
 	return (
 		<div className="control-plate">
-			Control Plate
+			<KeySelector
+				keyType={keyType}
+				rootNote={rootNote}
+				rootNoteChoices={rootNoteChoices				}
+				setKeyType={setKeyType}
+				setRootNote={setRootNote}
+			/>
+
 			{/*
 				Key Chooser
 				Vanilla / Blues - Mode Chooser

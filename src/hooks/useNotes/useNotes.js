@@ -1,8 +1,10 @@
 import React from 'react';
 
-import SCALES from './scales';
+import { KEY_TYPE } from '../../constants';
+import SCALES, { ROOTS } from './scales';
 
 const ACTION_TYPE = Object.freeze({
+	SET_KEY_TYPE: 'SET_KEY_TYPE',
 	SET_INTERVAL: 'SET_INTERVAL',
 	SET_ROOT_NOTE: 'SET_ROOT_NOTE',
 	UPDATE_NOTES: 'UPDATE_NOTES',
@@ -47,6 +49,7 @@ export const DEGREE = Object.freeze({
 	6: 'VII',
 });
 
+// TODO: replace open string pitches.
 export const TUNING = Object.freeze({
 	// Notes are listed low to high, then reversed.
 	EADGBE: { label: 'Spanish', notes: [ 4, 9, 2, 7, 11, 4 ].reverse() },
@@ -55,8 +58,11 @@ export const TUNING = Object.freeze({
 });
 
 // TODO: save state in local storage
+const initialKeyType = KEY_TYPE.MAJOR;
 const initialNoteState = {
+	keyType: initialKeyType,
 	rootNote: 9, // A
+	rootNoteChoices: ROOTS[initialKeyType],
 	notes: new Map([]),
 	openStringPitches: [ 4, 9, 2, 7, 11, 4 ].reverse(), // E A D G B E
 	style: STYLE.diatonic,
@@ -83,6 +89,14 @@ function noteReducer (state, action) {
 				...state,
 				interval: action.payload.interval,
 			};
+		case ACTION_TYPE.SET_KEY_TYPE:
+			const { keyType } = action.payload;
+
+			return {
+				...state,
+				keyType,
+				rootNoteChoices: ROOTS[keyType],
+			};
 
 		default:
 			throw new Error(action);
@@ -90,8 +104,8 @@ function noteReducer (state, action) {
 
 }
 
-function deriveNotes (rootNote, interval, degree = 1) {
-	const scale = SCALES['major'][rootNote];
+function deriveNotes (rootNote, interval, keyType, degree = 1) {
+	const scale = SCALES[keyType][rootNote];
 
 	// TODO: filter scale by scale degrees / intervals
 
@@ -109,13 +123,15 @@ export function useNotes () {
 		notes,
 		openStringPitches,
 		interval,
+		keyType,
 		rootNote,
+		rootNoteChoices,
 		style,
 		tuning,
 	} = state;
 	React.useEffect(() => {
-		dispatch({ type: ACTION_TYPE.UPDATE_NOTES, payload: deriveNotes(rootNote, interval) });
-	}, [ rootNote, interval ]);
+		dispatch({ type: ACTION_TYPE.UPDATE_NOTES, payload: deriveNotes(rootNote, interval, keyType) });
+	}, [ rootNote, interval, keyType ]);
 
 
 	const setRootNote = rootNote => dispatch({
@@ -131,16 +147,27 @@ export function useNotes () {
 			interval,
 		}
 	});
+
+	const setKeyType = keyType => {
+		dispatch({
+			type: ACTION_TYPE.SET_KEY_TYPE,
+			payload: {
+				keyType,
+			}
+		});
+	};
 	
 	return {
+		interval,
+		keyType,
 		notes,
 		openStringPitches,
-		interval,
 		rootNote,
+		rootNoteChoices,
 		style,
 		tuning,
-		//
-		setRootNote,
 		setInterval,
+		setKeyType,
+		setRootNote,
 	};
 }

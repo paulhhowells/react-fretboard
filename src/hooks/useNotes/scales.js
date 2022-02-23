@@ -23,7 +23,7 @@ const enharmonic = {
 	flat: [ 'C', 'D♭', 'D', 'E♭', 'E', 'F', 'G♭', 'G', 'A♭', 'A', 'B♭', 'B' ],
 };
 
-const roots = {
+export const ROOTS = {
 	major: [
 		{ note: 0, label: 'C', enharmonic: 'sharp' },
 		{ note: 1, label: 'D♭', enharmonic: 'flat' },
@@ -62,7 +62,7 @@ const sign = label =>	label.includes('♭')
 
 // TODO: probably should just generate a Look Up Table from this, and freeze it.
 const scales = {
-	major: roots.major.map(scale => {
+	major: ROOTS.major.map(scale => {
 		const twelve = enharmonic[scale.enharmonic];
 		const pattern = SCALE_PATTERN.MAJOR
 			.map((note, degree) => ([ (scale.note + note) % 12, degree + 1 ]))
@@ -75,7 +75,7 @@ const scales = {
 
 		return pattern;
 	}),
-	minor: roots.minor.map(scale => {
+	minor: ROOTS.minor.map(scale => {
 		const twelve = enharmonic[scale.enharmonic];
 		const pattern = SCALE_PATTERN.MINOR
 			.map((note, degree) => ([ (scale.note + note) % 12, degree + 1 ]))

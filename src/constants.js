@@ -11,3 +11,13 @@ export const FRET_MODE = Object.freeze({
 	EVEN: 'EVEN',
 	RULE_OF_EIGHTEEN: 'RULE_OF_EIGHTEEN',
 });
+
+export const KEY_TYPE = Object.freeze({
+	MAJOR: 'major',
+	MINOR: 'minor',
+});
+
+export const KEY_TYPE_OPTIONS = [
+	{ key: KEY_TYPE.MAJOR, label: 'Major' },
+	{ key: KEY_TYPE.MINOR, label: 'Minor' },
+];

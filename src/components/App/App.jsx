@@ -4,19 +4,33 @@ import Neck from '../Neck';
 import { useNotes, useSettings } from '../../hooks';
 
 function App () {
-	const { notes, openStringPitches } = useNotes();
+	const {
+		keyType,
+		notes,
+		openStringPitches,
+		rootNote,
+		rootNoteChoices,
+		setKeyType,
+		setRootNote,
+	} = useNotes();
 	const { fretMode,	numberOfFrets, numberOfStrings } = useSettings();
 
 	return (
 		<div className="App">
 			<h1>React Fretboard</h1>
-			<ControlPlate />
+			<ControlPlate
+				keyType={keyType}
+				rootNote={rootNote}
+				rootNoteChoices={rootNoteChoices}
+				setKeyType={setKeyType}
+				setRootNote={setRootNote}
+			/>
 			<Neck
-				openStringPitches={openStringPitches}
-				notes={notes}
 				fretMode={fretMode}
+				notes={notes}
 				numberOfFrets={numberOfFrets}
 				numberOfStrings={numberOfStrings}
+				openStringPitches={openStringPitches}
 			/>
 		</div>
 	);
