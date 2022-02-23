@@ -18,7 +18,7 @@
 	font-weight: 700;
 }
 .fretboard__note--flat {
-	letter-spacing: -2pt;
+	/* letter-spacing: -2pt; */
 }
 
 .fretboard__string {
