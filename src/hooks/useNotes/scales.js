@@ -54,13 +54,24 @@ const roots = {
 	],
 };
 
+const sign = label =>	label.includes('♭')
+	? 'flat'
+	: label.includes('♯')
+		? 'sharp'
+		: '';
+
 // TODO: probably should just generate a Look Up Table from this, and freeze it.
 const scales = {
 	major: roots.major.map(scale => {
 		const twelve = enharmonic[scale.enharmonic];
 		const pattern = SCALE_PATTERN.MAJOR
 			.map((note, degree) => ([ (scale.note + note) % 12, degree + 1 ]))
-			.map(([ note, degree ]) => ({ note, degree, label: twelve[note] }));
+			.map(([ note, degree ]) => ({
+				note,
+				degree,
+				label: twelve[note],
+				sign: sign(twelve[note]),
+			}));
 
 		return pattern;
 	}),
@@ -68,7 +79,12 @@ const scales = {
 		const twelve = enharmonic[scale.enharmonic];
 		const pattern = SCALE_PATTERN.MINOR
 			.map((note, degree) => ([ (scale.note + note) % 12, degree + 1 ]))
-			.map(([ note, degree ]) => ({ note, degree, label: twelve[note] }));
+			.map(([ note, degree ]) => ({
+				note,
+				degree,
+				label: twelve[note],
+				sign: sign(twelve[note]),
+			}));
 
 		return pattern;
 	})

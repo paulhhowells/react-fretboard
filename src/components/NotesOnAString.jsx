@@ -17,6 +17,7 @@ export default function NotesOnAString ({
 			// List all of the available frets:
 			const frets = Array(numberOfFrets).fill({});
 
+			// Map through each fret:
 			const string = frets
 				.map( // Derive note at each fret:
 					(_, position) => ({
@@ -28,10 +29,10 @@ export default function NotesOnAString ({
 				.filter( // List only the notes on the string:
 					fret => notes.has(fret.note)
 				)
-				.map( // Add a label to each note:
+				.map( // Add label & sign to each note:
 					fret => ({
 						...fret,
-						label: notes.get(fret.note)
+						...notes.get(fret.note),
 					})
 				);
 

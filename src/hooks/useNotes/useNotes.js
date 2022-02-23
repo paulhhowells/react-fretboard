@@ -96,7 +96,7 @@ function deriveNotes (rootNote, interval, degree = 1) {
 	// TODO: filter scale by scale degrees / intervals
 
 	const notes = new Map(
-		scale.map(({ note, label }) => ([ note, label ]))
+		scale.map(({ note, label, sign, degree }) => ([ note, { note, label, sign, degree } ]))
 	);
 
 	return notes;
