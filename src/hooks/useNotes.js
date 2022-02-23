@@ -107,10 +107,10 @@ const roots = {
 		{ note: 0, label: 'C', enharmonic: 'sharp' },
 		{ note: 1, label: 'D♭', enharmonic: 'flat' },
 		{ note: 2, label: 'D', enharmonic: 'sharp' },
-		{ note: 3, label: 'E♭', enharmonic: 'flat' },
+		{ note: 3, label: 'E♭', enharmonic: 'flat' }, // D♯ would have 2 double sharps.
 		{ note: 4, label: 'E', enharmonic: 'sharp' },
 		{ note: 5, label: 'F', enharmonic: 'flat' },
-		{ note: 6, label: 'G♭', enharmonic: 'flat' },
+		{ note: 6, label: 'G♭', enharmonic: 'flat' }, // Subsequently change B to C♭ to avoid having two Bs in the scale.
 		{ note: 7, label: 'G', enharmonic: 'sharp' },
 		{ note: 8, label: 'A♭', enharmonic: 'flat' },
 		{ note: 9, label: 'A', enharmonic: 'sharp' },
@@ -121,12 +121,7 @@ const roots = {
 		{ note: 0, label: 'C', enharmonic: 'flat' },
 		{ note: 1, label: 'C♯', enharmonic: 'sharp' },
 		{ note: 2, label: 'D', enharmonic: 'flat' },
-
-		// TODO:
-		// Eb minor has Bb and (5 - 11) B - sub B into Cb
-		// D# has (1 - 5) F and F# - sub F into E#
-		{ note: 3, label: 'E♭', enharmonic: 'flat' },
-
+		{ note: 3, label: 'E♭', enharmonic: 'flat' }, // Subsequently change B to C♭ to avoid having two Bs in the scale.
 		{ note: 4, label: 'E', enharmonic: 'sharp' },
 		{ note: 5, label: 'F', enharmonic: 'flat' },
 		{ note: 6, label: 'F♯', enharmonic: 'sharp' },
@@ -137,6 +132,8 @@ const roots = {
 		{ note: 11, label: 'B', enharmonic: 'sharp' },
 	],
 };
+
+// TODO: probably should just generate a Look Up Table from this, and freeze it.
 const scales = {
 	major: roots.major.map(scale => {
 		const twelve = enharmonic[scale.enharmonic];
@@ -155,6 +152,20 @@ const scales = {
 		return pattern;
 	})
 };
+
+// For G♭ /E♭m hack B to C♭ to avoid having two Bs in the scale.
+// If F♯ / D♯m enharmonics were used then F would need to become E♯.
+if (scales.major[6][0].label === 'G♭') {
+	scales.major[6][3].label = 'C♭';
+} else if (scales.major[6][0].label === 'F♯') {
+	scales.major[6][6].label = 'E♯';
+}
+
+if (scales.minor[3][0].label === 'E♭') {
+	scales.minor[3][5].label = 'C♭';
+} else if (scales.minor[3][0].label === 'D♯') {
+	scales.minor[3][1].label = 'E♯';
+}
 
 function deriveNotes (rootNote, interval, degree = 1) {
 	const scale = scales['major'][rootNote];
