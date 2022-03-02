@@ -5,12 +5,12 @@ import { useNotes, useSettings } from '../../hooks';
 
 function App () {
 	const {
-		keyType,
+		keySign,
 		notes,
-		openStringPitches,
+		tuning,
 		rootNote,
 		rootNoteChoices,
-		setKeyType,
+		setKeySign,
 		setRootNote,
 	} = useNotes();
 	const { fretMode,	numberOfFrets, numberOfStrings } = useSettings();
@@ -19,10 +19,10 @@ function App () {
 		<div className="App">
 			<h1>React Fretboard</h1>
 			<ControlPlate
-				keyType={keyType}
+				keySign={keySign}
 				rootNote={rootNote}
 				rootNoteChoices={rootNoteChoices}
-				setKeyType={setKeyType}
+				setKeySign={setKeySign}
 				setRootNote={setRootNote}
 			/>
 			<Neck
@@ -30,7 +30,7 @@ function App () {
 				notes={notes}
 				numberOfFrets={numberOfFrets}
 				numberOfStrings={numberOfStrings}
-				openStringPitches={openStringPitches}
+				tuning={tuning}
 			/>
 		</div>
 	);

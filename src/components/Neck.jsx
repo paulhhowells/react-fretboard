@@ -10,7 +10,7 @@ export default function Neck ({
 
 	numberOfStrings = 6,
 	fretMode = FRET_MODE.EVEN,
-	openStringPitches,
+	tuning,
 	notes,
 }) {
 	const { fretboardHeight, fretboardWidth, calculateFretX } = useFretboard({ fretMode, numberOfFrets, numberOfStrings });
@@ -32,7 +32,7 @@ export default function Neck ({
 				numberOfFrets={numberOfFrets}
 				calculateFretX={calculateFretX}
 				notes={notes}
-				openStringPitches={openStringPitches}
+				tuning={tuning}
 			/>
 		</svg>
 	);

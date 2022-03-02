@@ -9,7 +9,7 @@ export default function Notes ({
 	notes,
 	numberOfFrets,
 	calculateFretX,
-	openStringPitches,
+	tuning,
 }) {
 	return (
 		<g
@@ -17,7 +17,7 @@ export default function Notes ({
 			transform={`translate(${ FRETBOARD_LEFT_PAD } ${ STRING_TO_EDGE_OF_FRETBOARD })`}
 		>
 			{
-				openStringPitches.map(
+				tuning.notes.map(
 					(openStringPitch, index) => (<NotesOnAString
 						nut={openStringPitch}
 						notes={notes}

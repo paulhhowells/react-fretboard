@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { KEY_TYPE } from '../../constants';
-import SCALES, { ROOTS } from './scales';
+import { KEY_SIGN } from '../../constants';
+import { ROOTS, deriveNotes } from './scales';
 
 const ACTION_TYPE = Object.freeze({
-	SET_KEY_TYPE: 'SET_KEY_TYPE',
-	SET_INTERVAL: 'SET_INTERVAL',
+	SET_KEY_SIGN: 'SET_KEY_SIGN',
+	SET_PATTERN: 'SET_PATTERN',
 	SET_ROOT_NOTE: 'SET_ROOT_NOTE',
 	UPDATE_NOTES: 'UPDATE_NOTES',
 });
@@ -20,23 +20,22 @@ export const STYLE_OPTIONS = Object.freeze({
 	BLUES: {},
 });
 
-// TODO: rename
-export const INTERVAL = Object.freeze({
+export const PATTERN = Object.freeze({
 	// diatonic
-	DIATONIC: 'interval.diatonic',
-	TRIAD: 'interval.triad',
-	SEVENTH_CHORD: 'interval.seventhChord',
-	PENTATONIC: 'interval.pentatonic',
+	DIATONIC: 'scale.diatonic',
+	TRIAD: 'diatonic.triad',
+	SEVENTH_CHORD: 'diatonic.seventhChord',
+	PENTATONIC: 'scale.pentatonic',
 	// blues
-	DOMINANT_SEVENTH_CHORD: 'interval.dominantSeventhChord',
-	MIXOLYDIAN: 'interval.mixolydian',
-	MAJOR_BLUES: 'interval.majorBlues',
-	MINOR_BLUES: 'interval.minorBlues',
-	DIAD_3_7: 'interval.diad.3.7',
+	DOMINANT_SEVENTH_CHORD: 'pattern.dominantSeventhChord',
+	MIXOLYDIAN: 'scale.mixolydian',
+	MAJOR_BLUES: 'scale.majorBlues',
+	MINOR_BLUES: 'scale.minorBlues',
+	DIAD_3_7: 'diatonic.diad.3.7',
 	// TODO: how to offer a subset of these options in UI?
-	PENTATONIC_1: 'interval.pentatonic.1',
-	PENTATONIC_4: 'interval.pentatonic.4',
-	PENTATONIC_5: 'interval.pentatonic.5',
+	PENTATONIC_1: 'diatonic.pentatonic',
+	// PENTATONIC_4: 'diatonic.pentatonic.4',
+	// PENTATONIC_5: 'diatonic.pentatonic.5',
 });
 
 export const DEGREE = Object.freeze({
@@ -58,16 +57,16 @@ export const TUNING = Object.freeze({
 });
 
 // TODO: save state in local storage
-const initialKeyType = KEY_TYPE.MAJOR;
+const initialkeySign = KEY_SIGN.FLAT;
 const initialNoteState = {
-	keyType: initialKeyType,
+	keySign: initialkeySign,
 	rootNote: 9, // A
-	rootNoteChoices: ROOTS[initialKeyType],
+	rootNoteChoices: ROOTS[initialkeySign],
 	notes: new Map([]),
-	openStringPitches: [ 4, 9, 2, 7, 11, 4 ].reverse(), // E A D G B E
 	style: STYLE.diatonic,
-	interval: INTERVAL.diatonic,
+	pattern: PATTERN.DIATONIC,
 	tuning: TUNING.EADGBE,
+	degree: 0,
 };
 
 function noteReducer (state, action) {
@@ -84,36 +83,24 @@ function noteReducer (state, action) {
 				notes: action.payload,
 			};
 
-		case ACTION_TYPE.SET_INTERVAL:
+		case ACTION_TYPE.SET_PATTERN:
 			return {
 				...state,
 				interval: action.payload.interval,
+				pattern: action.payload.pattern,
 			};
-		case ACTION_TYPE.SET_KEY_TYPE:
-			const { keyType } = action.payload;
+		case ACTION_TYPE.SET_KEY_SIGN:
+			const { keySign } = action.payload;
 
 			return {
 				...state,
-				keyType,
-				rootNoteChoices: ROOTS[keyType],
+				keySign,
+				rootNoteChoices: ROOTS[keySign],
 			};
 
 		default:
 			throw new Error(action);
 	}
-
-}
-
-function deriveNotes (rootNote, interval, keyType, degree = 1) {
-	const scale = SCALES[keyType][rootNote];
-
-	// TODO: filter scale by scale degrees / intervals
-
-	const notes = new Map(
-		scale.map(({ note, label, sign, degree }) => ([ note, { note, label, sign, degree } ]))
-	);
-
-	return notes;
 }
 
 export function useNotes () {
@@ -121,17 +108,29 @@ export function useNotes () {
 
 	const {
 		notes,
-		openStringPitches,
-		interval,
-		keyType,
+		pattern,
+		keySign,
 		rootNote,
 		rootNoteChoices,
 		style,
 		tuning,
+		degree,
 	} = state;
 	React.useEffect(() => {
-		dispatch({ type: ACTION_TYPE.UPDATE_NOTES, payload: deriveNotes(rootNote, interval, keyType) });
-	}, [ rootNote, interval, keyType ]);
+		console.log('useEffect pattern', pattern);
+
+		dispatch({
+			type: ACTION_TYPE.UPDATE_NOTES,
+			payload: deriveNotes({
+				rootNote, // 0 to 11
+				pattern,
+				degree,
+
+				// TODO: should only toggle enharmonic keys
+				keySign, // sharp or flat
+			})
+		});
+	}, [ rootNote, pattern, keySign, degree ]);
 
 
 	const setRootNote = rootNote => dispatch({
@@ -141,33 +140,33 @@ export function useNotes () {
 		},
 	});
 
-	const setInterval = interval => dispatch({
-		type: ACTION_TYPE.SET_INTERVAL,
+	const setPattern = pattern => dispatch({
+		type: ACTION_TYPE.SET_PATTERN,
 		payload: {
+			pattern,
 			interval,
 		}
 	});
 
-	const setKeyType = keyType => {
+	const setKeySign = keySign=> {
 		dispatch({
-			type: ACTION_TYPE.SET_KEY_TYPE,
+			type: ACTION_TYPE.SET_KEY_SIGN,
 			payload: {
-				keyType,
+				keySign,
 			}
 		});
 	};
-	
+
 	return {
-		interval,
-		keyType,
+		pattern,
+		keySign,
 		notes,
-		openStringPitches,
 		rootNote,
 		rootNoteChoices,
 		style,
 		tuning,
-		setInterval,
-		setKeyType,
+		setPattern,
+		setKeySign,
 		setRootNote,
 	};
 }

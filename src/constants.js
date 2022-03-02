@@ -12,12 +12,12 @@ export const FRET_MODE = Object.freeze({
 	RULE_OF_EIGHTEEN: 'RULE_OF_EIGHTEEN',
 });
 
-export const KEY_TYPE = Object.freeze({
-	MAJOR: 'major',
-	MINOR: 'minor',
+export const KEY_SIGN = Object.freeze({
+	FLAT: 'flat',
+	SHARP: 'sharp',
 });
 
-export const KEY_TYPE_OPTIONS = [
-	{ key: KEY_TYPE.MAJOR, label: 'Major' },
-	{ key: KEY_TYPE.MINOR, label: 'Minor' },
+export const KEY_SIGN_OPTIONS = [
+	{ sign: KEY_SIGN.FLAT, label: 'Flat' },
+	{ sign: KEY_SIGN.SHARP, label: 'Sharp' },
 ];

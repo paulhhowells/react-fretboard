@@ -1,11 +1,11 @@
 import React from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { KEY_TYPE_OPTIONS } from '../../constants';
+import { KEY_SIGN_OPTIONS } from '../../constants';
 
 export default function KeySelector ({
-	keyType,
-	setKeyType,
+	keySign,
+	setKeySign,
 	rootNote,
 	rootNoteChoices,
 	setRootNote,
@@ -14,14 +14,18 @@ export default function KeySelector ({
 		setRootNote(keyRootNote);
 	};
 
-	const handleKeyType = (event, keyType) => {
-		setKeyType(keyType);
+	const handleSign = (event, sign) => {
+
+		if (sign) {
+			setKeySign(sign);
+		}
 	};
 
 	console.log('rootNoteChoices', rootNoteChoices);
 
 	return (
 		<>
+			Key
 			<ToggleButtonGroup
 				value={rootNote}
 				exclusive
@@ -35,17 +39,16 @@ export default function KeySelector ({
 					)
 				}
 			</ToggleButtonGroup>
-			{ rootNote }
 			<ToggleButtonGroup
-				value={keyType}
+				value={keySign}
 				exclusive
-				onChange={handleKeyType}
-				aria-label="Key Type"
+				onChange={handleSign}
+				aria-label="Sign Type"
 				size="small"
 			>
 				{
-					KEY_TYPE_OPTIONS.map(
-						({ key, label }) => (<ToggleButton key={key} value={key} aria-label={label}>{ label }</ToggleButton>)
+					KEY_SIGN_OPTIONS.map(
+						({ sign, label }) => (<ToggleButton key={sign} value={sign} aria-label={label}>{ label }</ToggleButton>)
 					)
 				}
 			</ToggleButtonGroup>

@@ -2,19 +2,19 @@ import React from 'react';
 import KeySelector from './KeySelector';
 
 export default function ControlPlate ({
-	keyType,
+	keySign,
 	rootNote,
 	rootNoteChoices,
-	setKeyType,
+	setKeySign,
 	setRootNote,
 }) {
 	return (
 		<div className="control-plate">
 			<KeySelector
-				keyType={keyType}
+				keySign={keySign}
+				setKeySign={setKeySign}
 				rootNote={rootNote}
-				rootNoteChoices={rootNoteChoices				}
-				setKeyType={setKeyType}
+				rootNoteChoices={rootNoteChoices}
 				setRootNote={setRootNote}
 			/>
 
