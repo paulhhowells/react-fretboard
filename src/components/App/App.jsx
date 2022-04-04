@@ -24,7 +24,7 @@ function App () {
 	const [ tuning ] = React.useState(TUNING.EADGBE);
 
 	return (
-		<div className="App">
+		<div className="app">
 			<h1>React Fretboard</h1>
 			<ControlPlate
 					degree={degree}
