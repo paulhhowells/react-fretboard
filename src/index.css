@@ -12,3 +12,33 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+body {
+	background-color: #f9f9f9;
+}
+
+.app {}
+.app > h1 {
+	margin: 0.25em 0.5em;
+  color: #FFF;
+  text-shadow: 0 2px 3px #0007;
+}
+
+.control-plate {
+	padding: 0.25em 1em;
+}
+.control-plate button {
+	text-transform: none;
+}
+
+.MuiToggleButtonGroup-root {
+	background-color: #fff;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+.row > div {
+	padding: 0.25em;
+}
