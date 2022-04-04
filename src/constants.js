@@ -164,6 +164,9 @@ export const STYLE_MODE_OPTIONS = Object.freeze({
 			},
 		],
 		degreeOptions: [
+			// TODO:
+			// need to rethink this for a minor blues
+			// which is 6, 2, 3, as 1, 4, 5.
 			{
 				// 1
 				degree: 0,
@@ -223,7 +226,7 @@ export const KEY = Object.freeze({
 	C_SHARP: 'C_SHARP',
 	D_FLAT: 'D_FLAT',
 	D: 'D',
-	D_SHARP: 'D_SHARP', // has 2 double sharps.
+	D_SHARP: 'D_SHARP', // Has 2 double sharps.
 	E_FLAT: 'E_FLAT',
 	E: 'E',
 	F: 'F',
