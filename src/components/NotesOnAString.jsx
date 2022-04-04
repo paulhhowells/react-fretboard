@@ -43,7 +43,12 @@ export default function NotesOnAString ({
 
 	return (
 		<g transform={`translate(0 ${ offsetY })`}>
-			{ string.map(note => (<Note note={note} key={note.label + note.position} />)) }
+			{
+				string.map(note => (<Note
+					note={note}
+					key={note.noteLabel + note.position}
+				/>))
+			}
 		</g>
 	);
 }

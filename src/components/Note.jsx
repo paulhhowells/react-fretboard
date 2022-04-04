@@ -1,16 +1,30 @@
 const elementClassName = 'fretboard__note';
 
 export default function Note ({ note }) {
-	const { degree, label, sign, x } = note;
+	const { degree, noteLabel, sign, x, keyRoot, scaleRoot } = note;
 	const radius = 8;
 	let className = elementClassName;
+
+	// TODO: intervalLabel
+	const label = noteLabel;
 
 	if (sign.length > 0) {
 		// Signal sharp or flat with a modifier.
 		className += ` ${elementClassName}--${sign}`;
 	}
 
-	if (degree === 1) {
+	if (keyRoot) {
+		// Signal it matches the key root.
+		className += ` ${elementClassName}--key-root`;
+	}
+
+	if (scaleRoot) {
+		// Signal it’s the root of the mode or chord.
+		className += ` ${elementClassName}--scale-root`;
+	}
+
+
+	if (degree === 0) {
 		// Signal it’s a root note.
 		className += ` ${elementClassName}--root`;
 	}

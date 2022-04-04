@@ -1,115 +1,71 @@
-// ROOTS:
-// 0   1   2   3   4   5   6   7   8   9   10  11
-// C   C#  D   D#  E   F   F#  G   G#  A   A#  B
-//     Db      Eb          Gb      Ab      Bb
+import {
+	KEY_DEFINITION,
+	KEY_SIGN,
+} from '../../constants';
 
-// Circle of fifths:
-// 6   5   4   3   2   1   0   1   2   3   4   5   6  // flats & sharps
-// Gb  Db  Ab  Eb  Bb  F   C   G   D   A   E   B   F#
-// =                       C                       =
-
-// Ebm Bbm Fm  Cm  Gm  Dm  Am  Em  Bm  F#m C#m G#m D#m
-
-const SCALE_BASIS = {
-	MAJOR: [ 0, 2, 4, 5, 7, 9, 11 ],
-	MINOR: [ 0, 2, 3, 5, 7,	8, 10	],
-	HARMONIC_MINOR: [ 0, 2, 3, 5, 7, 8, 11 ],
-	ASCENDING_MELODIC_MINOR: [ 0, 2, 3, 5, 7,	9, 11 ],
-	DESCENDING_MELODIC_MINOR: [ 0, 2, 3, 5, 7, 8, 10	],
-};
-
-const enharmonic = {
-	sharp: [ 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B' ],
-	flat: [ 'C', 'D♭', 'D', 'E♭', 'E', 'F', 'G♭', 'G', 'A♭', 'A', 'B♭', 'B' ],
-};
-const keySignatureSign = {
-	B: 'sharp', // B 5
-	E: 'sharp', // E 4
-	A: 'sharp', // A 3
-	D: 'sharp', // D 2
-	G: 'sharp', // G 1
-	C: 'sharp', // C 0
-	F: 'flat',  // F 1
-	'B♭': 'flat', // B♭ 2
-	'E♭': 'flat', // E♭ 3
-	'A♭': 'flat', // A♭ 4
-	'D♭': 'flat', // D♭ 5
-};
-const defaultLabel = [
-	'C',
-	'D♭',
-	'D',
-	'E♭',
-	'E',
-	'F',
-	null,
-	'G',
-	'A♭',
-	'A',
-	'B♭',
-	'B',
-	'C',
-];
-
-// Use to offer choices in UI according to sign sharp / flat.
-export const ROOTS = {
-	flat: [
-		{ note: 0, label: 'C', sign: 'sharp' },
-		{ note: 1, label: 'D♭', sign: 'flat' },
-		{ note: 2, label: 'D', sign: 'sharp' },
-		{ note: 3, label: 'E♭', sign: 'flat' }, // D♯ would have 2 double sharps.
-		{ note: 4, label: 'E', sign: 'sharp' },
-		{ note: 5, label: 'F', sign: 'flat' },
-		{ note: 6, label: 'G♭', sign: 'flat' }, // Subsequently change B to C♭ to avoid having two Bs in the scale.
-		{ note: 7, label: 'G', sign: 'sharp' },
-		{ note: 8, label: 'A♭', sign: 'flat' },
-		{ note: 9, label: 'A', sign: 'sharp' },
-		{ note: 10, label: 'B♭', sign: 'flat' },
-		{ note: 11, label: 'B', sign: 'sharp' },
-	],
-	sharp: [
-		{ note: 0, label: 'C', sign: 'sharp' },
-		{ note: 1, label: 'C♯', sign: 'sharp' },
-		{ note: 2, label: 'D', sign: 'sharp' },
-		{ note: 3, label: 'E♭', sign: 'flat' }, // D♯ would have 2 double sharps.
-		{ note: 4, label: 'E', sign: 'sharp' },
-		{ note: 5, label: 'F', sign: 'flat' },
-		{ note: 6, label: 'F♯', sign: 'sharp' }, // Fix
-		{ note: 7, label: 'G', sign: 'sharp' },
-		{ note: 8, label: 'G♯', sign: 'sharp' },
-		{ note: 9, label: 'A', sign: 'sharp' },
-		{ note: 10, label: 'A♯', sign: 'sharp' },
-		{ note: 11, label: 'B', sign: 'sharp' },
-	],
-};
-
-const PATTERNS = {
-	scale: {
-		//					1  2  3  4  5  6  7
-		diatonic: [ 0, 2, 4, 5, 7, 9, 11 ],
-		mixolydian: [ 0, 2, 4, 5, 7, 9, 10 ],
-		pentatonic: [ 0, 2, 4, 7, 9 ],
-		majorBlues: [ 0, 2, 3, 4, 7, 9 ],
-		minorBlues: [ 0, 3, 5, 6, 7, 10 ],
-	},
-	diatonic: {
-		triad: [ 0, 2, 4 ],
-		seventhChord: [ 0, 2, 4, 6 ],
-		pentatonic: [ 0, 1, 2, 4, 5 ],
-	},
+const notation = {
+	flat: '♭',
+	sharp: '♯',
+	natural: '♮',
+	doubleFlat: '𝄫'
 };
 
 const PATTERN = {
-	'scale.diatonic': PATTERNS.scale.diatonic,
-	'scale.mixolydian': PATTERNS.scale.mixolydian,
-	'scale.pentatonic': PATTERNS.scale.pentatonic,
-	'scale.majorBlues': PATTERNS.scale.majorBlues,
-	'scale.minorBlues': PATTERNS.scale.minorBlues,
+	// Scale. Number matches one of 12 notes.
+	scale: {
+	//					1  2  3  4  5  6  7
+		diatonic: [ 0, 2, 4, 5, 7, 9, 11 ],
+	},
+	// Diatonic. Number matches one of 7 degrees, and
+	// may be shifted by mode.
+	diatonic: {
+		triad: [ 0, 2, 4 ],
+		seventhChord: [ 0, 2, 4, 6 ],
 
-	'diatonic.triad': PATTERNS.diatonic.triad,
-	'diatonic.seventhChord': PATTERNS.diatonic.seventhChord,
-	'diatonic.pentatonic': PATTERNS.diatonic.pentatonic,
+		// TODO use I II III IV keys
+		pentatonic: {
+			'0': [ 0, 1, 2, 4, 5 ], // I
+			'1': [ 0, 2, 3, 4, 6 ],	// ii-
+			'2': [ 0, 2, 3, 4, 6 ],	// iii-
+			'3': [ 0, 1, 2, 4, 5 ],	// IV
+			'4': [ 0, 1, 2, 4, 5 ],	// V
+			'5': [ 0, 2, 3, 4, 6 ],	// vi-
+			'6': [ 0, 2, 4, 5, 6 ],	// VII /º ?
+		},
+	},
+	// Modal: Number matches one of 12 notes.
+	modal: {
+		dominantSeventhChord: [ 0, 4, 7, 10 ],
+		mixolydian: [ 0, 2, 4, 5, 7, 9, 10 ],
+		majorBlues: [ 0, 2, 3, 4, 7, 9 ],
+		minorBlues: [ 0, 3, 5, 6, 7, 10 ],
+		diad_3_7: [ 4, 10 ],
+	}
 };
+
+const ENHARMONIC = {
+	sharp: [ 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B' ],
+	flat: [ 'C', 'D♭', 'D', 'E♭', 'E', 'F', 'G♭', 'G', 'A♭', 'A', 'B♭', 'B' ],
+};
+
+const patternRegex = /(\w+)(\.)(.*)/i;
+
+// degree of scale is 0 to 7
+function getIntervalString (degreeIndex, semitones) {
+	const degree = String(degreeIndex + 1);
+
+	if (semitones === 0 || degreeIndex === 0) {
+		return degree;
+	}
+
+	const sign = (semitones === -2)
+		? notation.doubleFlat
+		: (semitones > 0)
+			? notation.sharp
+			: notation.flat;
+
+	return sign.repeat(Math.abs(semitones)) + degree;
+}
 
 const sign = label =>	label && label.includes('♭')
 	? 'flat'
@@ -117,99 +73,186 @@ const sign = label =>	label && label.includes('♭')
 		? 'sharp'
 		: '';
 
-// TODO: rename
-// will rootnote be a number or an object?
+const BLUES_INTERVAL = [
+	'R',
+	'♭2',
+	'2',
+	'♭3',
+	'3',
+	'4',
+	'♭5',
+	'5',
+	'♭6',
+	'6',
+	'♭7',
+	'7',
+];
+
 export const deriveNotes = ({
-	rootNote, // 0 to 11
-	keySign, // sharp or flat
-	// scaleBasisId = 'MAJOR',
+	keyRoot,
 	pattern,
-	degree = 0
+	degreeIndex = 0, // Degree of diatonic scale that mode is built upon.
 }) => {
-	console.log('deriveNotes pattern', pattern);
+	// A number 0 to 11
+	const rootNote = KEY_DEFINITION[keyRoot].note;
 
-	// Get 12 notes, either sharp or flat according to sign.
-	// e.g. [ 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B' ],
-	const derivedSign = keySignatureSign[defaultLabel[rootNote]] || keySign;
-	let twelve = enharmonic[derivedSign];
+	const keySign = (KEY_DEFINITION[keyRoot].flat === true)
+		? KEY_SIGN.FLAT
+		: KEY_SIGN.SHARP;
 
-	// Then derive a scale of 7 notes, or a cluster from a scale.
-	// Scales only need to jump through the 12.
-	// pattern === scale.minorBlues
-	// diatonic.pentatonic
-	const regex = /(\w+)(\.)(.*)/i;
-	const match = pattern.match(regex);
+	const twelveNoteDescription = ENHARMONIC[keySign];
 
-	let notes = [];
+	const patternMatch = pattern.match(patternRegex);
+	const patternType = patternMatch[1];
+	const patternNotes = PATTERN[patternType][patternMatch[3]];
 
-	console.log('match', match);
-
-	if (match[1] === 'diatonic') {
-		const diatonic = PATTERNS.scale.diatonic; // [ 0, 2, 4, 5, 7, 9, 11
-
-		const scale = (degree === 0)
-			? diatonic
-			: [
-				...diatonic.slice(degree),
-				...diatonic.slice(0, degree),
-			];
-
-		const sevenNotes = scale
-			.map(note => ((rootNote + note) % 12))
-			.map((note, index) => ({
-				note,
-				label: twelve[note],
-				degree: (index + degree) % scale.length,
-				sign: sign(twelve[note]),
-			}));
-
-		notes = PATTERN[pattern].map(degree => sevenNotes[degree]);
-		//
-	} else if (match[1] === 'scale') {
-		// const scale = PATTERN[match[0]]; // === PATTERNS.scale[match[3]]
-		const scale = (degree === 0)
-			? PATTERN[pattern]
-			: [
-				...PATTERN[pattern].slice(degree),
-				...PATTERN[pattern].slice(0, degree),
-			];
-
-		notes = scale
-			.map(note => ((rootNote + note) % 12))
-			.map((note, index) => ({
-				note,
-				label: twelve[note],
-				degree: (index + degree) % scale.length,
-				sign: sign(twelve[note]),
-			}));
+	if (!patternNotes) {
+		throw new Error('Missing pattern: ' + pattern);
 	}
 
-	console.log('notes', notes);
+	const notes = notesFromPattern({
+		degreeIndex,
+		patternNotes,
+		patternType,
+		rootNote,
+		twelveNoteDescription,
+	});
 
-	return new Map(notes.map(
-		({
-			note, label, sign, degree
-		}) => ([
-			note,
-			{ note, label, sign, degree }
-		])
-	));
+	return {
+		notes: new Map(
+			notes.map(definition => ([ definition.note, definition ]))
+		),
+		// TODO: is this used?
+		// degrees: new Map([
+		// 	[ 0, {
+		// 		note: 9,
+		// 		intervalLabel: 'null',
+		// 		noteLabel: 'null',
+		// 	} ],
+		// ]),
+	};
 };
 
-// For G♭ /E♭m hack B to C♭ to avoid having two Bs in the scale.
-// If F♯ / D♯m enharmonics were used then F would need to become E♯.
-if (scales.major[6][0].label === 'G♭') {
-	scales.major[6][3].label = 'C♭';
-} else if (scales.major[6][0].label === 'F♯') {
-	scales.major[6][6].label = 'E♯';
+function notesFromPattern ({
+	degreeIndex,
+	patternNotes,
+	patternType,
+	rootNote,
+	twelveNoteDescription
+}) {
+	const diatonic = PATTERN.scale.diatonic; // [ 0, 2, 4, 5, 7, 9, 11
+
+	if (patternType === 'diatonic') {
+		// For II Dorian mode of C, this is D E F G A B C - 2, 4, 5, 7, 9, 11, 0
+		const modeScale = (degreeIndex === 0)
+			? diatonic
+			: [
+				...diatonic.slice(degreeIndex),
+				...diatonic.slice(0, degreeIndex),
+			];
+
+		// Derive intervals from degreeIndex (which created modeScale) so that
+		// a #4 or b5 is used correctly.
+		// Calculate all the intervals for each degree of the
+		// scale, not just those that will be used by the pattern.
+		const intervals = modeScale.map((value, index, array) => {
+			const intervalSemitones = (value - array[0] + 12) % 12;
+			const diatonicSemitones = diatonic[index];
+			const difference = intervalSemitones - diatonicSemitones; // -ve for flat, +ve for sharp.
+			const label = getIntervalString(index, difference);
+
+			return {
+				label,
+				semitones: intervalSemitones,
+			};
+		});
+
+		const diatonicPattern = (Array.isArray(patternNotes))
+			? patternNotes
+			: patternNotes[degreeIndex];
+
+		const notes = diatonicPattern
+			.map(scaleDegree => {
+				const {
+					label: intervalLabel,
+					semitones,
+				} = intervals[scaleDegree];
+
+				const note = (rootNote + modeScale[scaleDegree]) % 12; // number 0 - 11
+				const noteLabel = twelveNoteDescription[note];
+
+				return {
+					note,										// Number [0 - 11]
+					noteLabel,
+					intervalLabel,					// Interval as a string.
+					semitones,							// Interval as semitones.
+					degree: scaleDegree,		// Number [0 - 7]
+					sign: sign(noteLabel),	// TODO is this needed?
+					type: patternType,
+
+					...(note === rootNote && { keyRoot: true }),
+				};
+			});
+
+		return notes;
+	} else if (patternType === 'modal') {
+		const modalRoot = (rootNote + diatonic[degreeIndex]) % 12;
+
+		// TODO: LUT for all intervals?
+
+		const modalPattern = (Array.isArray(patternNotes))
+			? patternNotes
+			: patternNotes[degreeIndex];
+
+		const notes = modalPattern
+			.map(modalNote => ([
+				modalNote,
+				(modalNote + modalRoot) % 12,
+			]))
+			.map(([ modalNote, note ]) => ({
+				note,
+				noteLabel: twelveNoteDescription[note],
+				sign: sign(twelveNoteDescription[note]),
+				type: patternType,
+
+				// TODO:
+				// think about picking 1, 4, 5, and then
+				// major or minor, and 1, 4, 5, & 1m, 4m, 5m, over 1 4 5
+				// and minor blues
+				// and what if it's modal not blues and needs sharps,
+				// jazz?!
+				// interval: bluesInterval({ modalNote, modalRoot, note }),
+				interval: BLUES_INTERVAL[modalNote],
+
+				// TODO: use these to add css blues classes
+				...(note === rootNote && { keyRoot: true }),
+				...(modalNote === 0 && { scaleRoot: true }),
+			}));
+
+		return notes;
+	} else if (patternType === 'scale') {
+		// Derive a set of notes from the key, each number
+		// in the pattern being the index of one of the 12 notes available.
+
+		// TODO: check, does degreeIndex work?
+
+		const scale = (degreeIndex === 0)
+			? patternNotes
+			: [
+				...patternNotes.slice(degreeIndex),
+				...patternNotes.slice(0, degreeIndex),
+			];
+
+		const notes = scale
+			.map(note => ((rootNote + note) % 12))
+			.map((note, index) => ({
+				note,
+				noteLabel: twelveNoteDescription[note],
+				degree: (index + degreeIndex) % scale.length,
+				sign: sign(twelveNoteDescription[note]),
+				type: patternType,
+			}));
+
+		return notes;
+	}
 }
-
-if (scales.minor[3][0].label === 'E♭') {
-	scales.minor[3][5].label = 'C♭';
-} else if (scales.minor[3][0].label === 'D♯') {
-	scales.minor[3][1].label = 'E♯';
-}
-
-const SCALES = Object.freeze(scales);
-
-export default SCALES;

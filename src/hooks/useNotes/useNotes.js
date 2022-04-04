@@ -1,103 +1,79 @@
 import React from 'react';
 
-import { KEY_SIGN } from '../../constants';
-import { ROOTS, deriveNotes } from './scales';
+import {
+	KEY,
+	KEY_DEFINITION,
+	PATTERN,
+	STYLE_MODE_OPTIONS,
+} from '../../constants';
+import { STYLE_MODE } from './constants';
+import { deriveNotes } from './scales';
 
 const ACTION_TYPE = Object.freeze({
-	SET_KEY_SIGN: 'SET_KEY_SIGN',
+	SET_DEGREE: 'SET_DEGREE',
 	SET_PATTERN: 'SET_PATTERN',
 	SET_ROOT_NOTE: 'SET_ROOT_NOTE',
-	UPDATE_NOTES: 'UPDATE_NOTES',
-});
-
-export const STYLE = Object.freeze({
-	DIATONIC: 'style.diatonic',
-	BLUES: 'style.blues',
-});
-
-export const STYLE_OPTIONS = Object.freeze({
-	DIATONIC: {},
-	BLUES: {},
-});
-
-export const PATTERN = Object.freeze({
-	// diatonic
-	DIATONIC: 'scale.diatonic',
-	TRIAD: 'diatonic.triad',
-	SEVENTH_CHORD: 'diatonic.seventhChord',
-	PENTATONIC: 'scale.pentatonic',
-	// blues
-	DOMINANT_SEVENTH_CHORD: 'pattern.dominantSeventhChord',
-	MIXOLYDIAN: 'scale.mixolydian',
-	MAJOR_BLUES: 'scale.majorBlues',
-	MINOR_BLUES: 'scale.minorBlues',
-	DIAD_3_7: 'diatonic.diad.3.7',
-	// TODO: how to offer a subset of these options in UI?
-	PENTATONIC_1: 'diatonic.pentatonic',
-	// PENTATONIC_4: 'diatonic.pentatonic.4',
-	// PENTATONIC_5: 'diatonic.pentatonic.5',
-});
-
-export const DEGREE = Object.freeze({
-	0: 'I',
-	1: 'II',
-	2: 'III',
-	3: 'IV',
-	4: 'V',
-	5: 'VI',
-	6: 'VII',
-});
-
-// TODO: replace open string pitches.
-export const TUNING = Object.freeze({
-	// Notes are listed low to high, then reversed.
-	EADGBE: { label: 'Spanish', notes: [ 4, 9, 2, 7, 11, 4 ].reverse() },
-	DADGAD: { label: 'DADGAD', notes: [ 2, 9, 2, 7, 9, 2 ].reverse() },
-	DADGBD: { label: 'Double Drop D', notes: [ 2, 9, 2, 7, 11, 2 ].reverse() },
+	SET_STYLE_MODE: 'SET_STYLE_MODE',
 });
 
 // TODO: save state in local storage
-const initialkeySign = KEY_SIGN.FLAT;
+const defaultStyleMode = STYLE_MODE.BLUES;
 const initialNoteState = {
-	keySign: initialkeySign,
-	rootNote: 9, // A
-	rootNoteChoices: ROOTS[initialkeySign],
-	notes: new Map([]),
-	style: STYLE.diatonic,
-	pattern: PATTERN.DIATONIC,
-	tuning: TUNING.EADGBE,
+	keyRoot: KEY.A,
 	degree: 0,
+	notes: new Map([]),
+	// pattern: STYLE_MODE_OPTIONS[defaultStyleMode].patternOptions[3].pattern,
+	pattern: PATTERN.MAJOR_BLUES,
+	rootNote: 9, // A // TODO: superfluous?
+	styleMode: defaultStyleMode,
 };
 
 function noteReducer (state, action) {
 	switch (action.type) {
-		case ACTION_TYPE.SET_ROOT_NOTE:
+		case ACTION_TYPE.SET_KEY_ROOT:
+			const { keyRoot } = action.payload;
+
 			return {
 				...state,
-				rootNote: action.payload.rootNote,
+				keyRoot,
+				// should this be derived elsewhere?
+				rootNote: KEY_DEFINITION[keyRoot].note,
 			};
-
 		case ACTION_TYPE.UPDATE_NOTES:
 			return {
 				...state,
 				notes: action.payload,
 			};
-
 		case ACTION_TYPE.SET_PATTERN:
 			return {
 				...state,
-				interval: action.payload.interval,
 				pattern: action.payload.pattern,
 			};
-		case ACTION_TYPE.SET_KEY_SIGN:
-			const { keySign } = action.payload;
-
+		case ACTION_TYPE.SET_DEGREE:
 			return {
 				...state,
-				keySign,
-				rootNoteChoices: ROOTS[keySign],
+				degree: action.payload.degree,
+			};
+		case ACTION_TYPE.SET_STYLE_MODE:
+			const { styleMode } = action.payload;
+			const { degree, pattern } = state;
+			const { patternOptions, degreeOptions } = STYLE_MODE_OPTIONS[styleMode];
+			const newState = {
+				...state,
+				styleMode,
 			};
 
+			// Update pattern & degree if current values are not valid options for styleMode.
+			// TODO use .some instead of .find ?
+			if (patternOptions.find(patternOption => patternOption.pattern === pattern) === undefined) {
+				newState.pattern = patternOptions[0].pattern;
+			}
+
+			if (degreeOptions.find(degreeOption => degreeOption.degree === degree) === undefined) {
+				newState.degree = degreeOptions[0].degree;
+			}
+
+			return newState;
 		default:
 			throw new Error(action);
 	}
@@ -107,66 +83,66 @@ export function useNotes () {
 	const [ state, dispatch ] = React.useReducer(noteReducer, initialNoteState);
 
 	const {
-		notes,
-		pattern,
-		keySign,
-		rootNote,
-		rootNoteChoices,
-		style,
-		tuning,
+		keyRoot,
 		degree,
+		pattern,
+		rootNote,
+		styleMode,
 	} = state;
-	React.useEffect(() => {
-		console.log('useEffect pattern', pattern);
 
-		dispatch({
-			type: ACTION_TYPE.UPDATE_NOTES,
-			payload: deriveNotes({
-				rootNote, // 0 to 11
-				pattern,
-				degree,
+	const { notes } = React.useMemo(() => deriveNotes({
+		keyRoot,
+		pattern,
+		degreeIndex: degree,
+	}), [ keyRoot, pattern, degree ]);
 
-				// TODO: should only toggle enharmonic keys
-				keySign, // sharp or flat
-			})
-		});
-	}, [ rootNote, pattern, keySign, degree ]);
+	const patternOptions = STYLE_MODE_OPTIONS[styleMode].patternOptions;
+	const degreeOptions = React.useMemo(
+		() => STYLE_MODE_OPTIONS[styleMode].degreeOptions.map(option => ({
+			...option,
+			intervalLabel: '',
+			noteLabel: '',
+		})),
+		[ styleMode ]
+	);
 
+	const setDegree = React.useCallback(
+		degree => dispatch({
+			type: ACTION_TYPE.SET_DEGREE,
+			payload: { degree },
+		}), []);
 
-	const setRootNote = rootNote => dispatch({
-		type: ACTION_TYPE.SET_ROOT_NOTE,
-		payload: {
-			rootNote,
-		},
-	});
+	const setPattern = React.useCallback(
+		pattern => dispatch({
+			type: ACTION_TYPE.SET_PATTERN,
+			payload: { pattern },
+		}), []);
 
-	const setPattern = pattern => dispatch({
-		type: ACTION_TYPE.SET_PATTERN,
-		payload: {
-			pattern,
-			interval,
-		}
-	});
+	const setStyleMode = React.useCallback(
+		styleMode => dispatch({
+			type: ACTION_TYPE.SET_STYLE_MODE,
+			payload: { styleMode },
+		}), []);
 
-	const setKeySign = keySign=> {
-		dispatch({
-			type: ACTION_TYPE.SET_KEY_SIGN,
-			payload: {
-				keySign,
-			}
-		});
-	};
+	// TODO: rename as setKey ?
+	const setKeyRoot = React.useCallback(
+		keyRoot => dispatch({
+			type: ACTION_TYPE.SET_KEY_ROOT,
+			payload: { keyRoot },
+		}), []);
 
 	return {
-		pattern,
-		keySign,
+		degree,
+		degreeOptions,
+		keyRoot,
 		notes,
+		pattern,
+		patternOptions,
 		rootNote,
-		rootNoteChoices,
-		style,
-		tuning,
+		setDegree,
+		setKeyRoot,
 		setPattern,
-		setKeySign,
-		setRootNote,
+		setStyleMode,
+		styleMode,
 	};
 }
