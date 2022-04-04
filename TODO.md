@@ -1,11 +1,11 @@
 # TO DO
 
 ## Features
-[ ] note types for styling, e.g. passing b5
-[ ] option to show notes as intervals / scale degrees
-[ ] layers, e.g. scale layer over chord layer
-[ ] settings view
-[ ] add setting > select tuning
+* [ ] note types for styling, e.g. passing b5
+* [ ] option to show notes as intervals / scale degrees
+* [ ] layers, e.g. scale layer over chord layer
+* [ ] settings view
+* [ ] add setting > select tuning
 * make design responsive, e.g. fretboard width
 * string muting
 * connector layer, interval lines, e.g. for parallel 6ths
@@ -19,12 +19,12 @@
 		* thus chord changes and scale changes possible
 * sound: play root notes? midi?
 * sync changes to an audio file?
-[x] roll fretboard edges (reduce edge to string distance)
+* [x] roll fretboard edges (reduce edge to string distance)
 
 ## Fix
-[x] diatonic degrees
-[ ] fix font size in note
-[ ] font for sharp & flat spacing
+* [x] diatonic degrees
+* [ ] fix font size in note
+* [ ] font for sharp & flat spacing
 
 ## Refactor
 * context
