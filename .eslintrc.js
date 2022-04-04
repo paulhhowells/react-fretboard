@@ -46,6 +46,7 @@ module.exports = {
 
 			// blankline before if blocks
 			{ 'blankLine': 'always', 'prev': [ '*' ], 'next': 'if' },
+			{ 'blankLine': 'always', 'prev': [ 'if' ], 'next': '*' },
 
 			// blankline after IIFE
 			{ 'blankLine': 'always', 'prev': 'iife', 'next': '*' }
