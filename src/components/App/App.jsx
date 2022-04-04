@@ -4,6 +4,8 @@ import Neck from '../Neck';
 import { useNotes, useSettings } from '../../hooks';
 import { TUNING } from '../../constants';
 
+export const NoteContext = React.createContext();
+
 function App () {
 	const {
 		degree,
@@ -26,6 +28,10 @@ function App () {
 	return (
 		<div className="app">
 			<h1>React Fretboard</h1>
+			<NoteContext.Provider value={{
+				styleMode, setStyleMode,
+				keyRoot, setKeyRoot,
+			}}>
 			<ControlPlate
 					degree={degree}
 					pattern={pattern}
@@ -42,6 +48,7 @@ function App () {
 				numberOfStrings={numberOfStrings}
 				tuning={tuning}
 			/>
+			</NoteContext.Provider>
 		</div>
 	);
 }
