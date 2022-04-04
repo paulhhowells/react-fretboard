@@ -34,7 +34,7 @@ const DEGREE_LABEL = Object.freeze({
 
 export const degreeLabels = Object.values(DEGREE_LABEL);
 
-export const PATTERN = Object.freeze({
+export const PATTERN_TYPE = Object.freeze({
 	// diatonic
 	DIATONIC: 'scale.diatonic',
 	TRIAD: 'diatonic.triad',
@@ -57,9 +57,19 @@ export const PATTERN = Object.freeze({
 	// PENTATONIC_5: 'diatonic.pentatonic.5',
 });
 
-export const patternLabels = Object
-	.entries(PATTERN)
-	.map(([ pattern, label ]) => ({ pattern, label }));
+// Enum.
+export const PATTERN = Object.freeze({
+	DIATONIC: 'DIATONIC',
+	TRIAD: 'TRIAD',
+	SEVENTH_CHORD: 'SEVENTH_CHORD',
+	PENTATONIC: 'PENTATONIC',
+	DOMINANT_SEVENTH_CHORD: 'DOMINANT_SEVENTH_CHORD',
+	MIXOLYDIAN: 'MIXOLYDIAN',
+	MAJOR_BLUES: 'MAJOR_BLUES',
+	MINOR_BLUES: 'MINOR_BLUES',
+	DIAD_3_7: 'DIAD_3_7',
+	// PENTATONIC_1: 'pentatonic',
+});
 
 export const STYLE_MODE_OPTIONS = Object.freeze({
 	DIATONIC: {
