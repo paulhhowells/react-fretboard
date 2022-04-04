@@ -1,6 +1,7 @@
 import {
 	KEY_DEFINITION,
 	KEY_SIGN,
+	PATTERN_TYPE,
 } from '../../constants';
 
 const notation = {
@@ -90,7 +91,7 @@ const BLUES_INTERVAL = [
 
 export const deriveNotes = ({
 	keyRoot,
-	pattern,
+	pattern: patternId,
 	degreeIndex = 0, // Degree of diatonic scale that mode is built upon.
 }) => {
 	// A number 0 to 11
@@ -102,6 +103,7 @@ export const deriveNotes = ({
 
 	const twelveNoteDescription = ENHARMONIC[keySign];
 
+	const pattern = PATTERN_TYPE[patternId];
 	const patternMatch = pattern.match(patternRegex);
 	const patternType = patternMatch[1];
 	const patternNotes = PATTERN[patternType][patternMatch[3]];

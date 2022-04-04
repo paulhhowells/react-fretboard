@@ -2,28 +2,38 @@ import React from 'react';
 import ControlPlate from '../ControlPlate';
 import Neck from '../Neck';
 import { useNotes, useSettings } from '../../hooks';
+import { TUNING } from '../../constants';
 
 function App () {
 	const {
-		keySign,
+		degree,
 		notes,
-		tuning,
-		rootNote,
-		rootNoteChoices,
-		setKeySign,
-		setRootNote,
+		pattern,
+		styleMode,
+		setDegree,
+		setPattern,
+		setStyleMode,
+		keyRoot,
+		setKeyRoot,
+
+		patternOptions,
+		degreeOptions,
 	} = useNotes();
 	const { fretMode,	numberOfFrets, numberOfStrings } = useSettings();
+
+	const [ tuning ] = React.useState(TUNING.EADGBE);
 
 	return (
 		<div className="App">
 			<h1>React Fretboard</h1>
 			<ControlPlate
-				keySign={keySign}
-				rootNote={rootNote}
-				rootNoteChoices={rootNoteChoices}
-				setKeySign={setKeySign}
-				setRootNote={setRootNote}
+					degree={degree}
+					pattern={pattern}
+					setDegree={setDegree}
+					setPattern={setPattern}
+					styleMode={styleMode}
+					patternOptions={patternOptions}
+					degreeOptions={degreeOptions}
 			/>
 			<Neck
 				fretMode={fretMode}
