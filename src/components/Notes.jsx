@@ -1,3 +1,4 @@
+import { useScaleNotes } from '../context/ScaleContext';
 import NotesOnAString from './NotesOnAString';
 import {
 	FRETBOARD_LEFT_PAD,
@@ -6,11 +7,12 @@ import {
 } from '../constants';
 
 export default function Notes ({
-	notes,
 	numberOfFrets,
 	calculateFretX,
 	tuning,
 }) {
+	const notes = useScaleNotes();
+
 	return (
 		<g
 			id="strings"

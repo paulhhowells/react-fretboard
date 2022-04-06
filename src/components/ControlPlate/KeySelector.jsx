@@ -2,13 +2,11 @@ import React from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+
 import { keySelectOptions } from '../../constants';
-import { NoteContext } from '../App';
 
-export default function KeySelector () {
-	const { keyRoot: key, setKeyRoot: setKey } = React.useContext(NoteContext);
-
-	const handleChange = event => setKey(event.target.value);
+export default function KeySelector ({ keyRoot, setKeyRoot }) {
+	const handleChange = event => setKeyRoot(event.target.value);
 
 	return (
 		<FormControl
@@ -18,7 +16,7 @@ export default function KeySelector () {
 			<Select
 				fullWidth
 				id="key-select"
-				value={key}
+				value={keyRoot}
 				onChange={handleChange}
 				size="small"
 			>

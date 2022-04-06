@@ -3,20 +3,33 @@ import DegreeSelector from './DegreeSelector';
 import PatternSelector from './PatternSelector';
 import StyleModeSelector from './StyleModeSelector';
 import KeySelector from './KeySelector';
+import { useScaleOptions } from '../../context/ScaleContext';
 
-export default function ControlPlate ({
-	degree,
-	pattern,
-	patternOptions,
-	degreeOptions,
-	setDegree,
-	setPattern,
-}) {
+export default function ControlPlate () {
+	const {
+		degree,
+		degreeOptions,
+		keyRoot,
+		pattern,
+		patternOptions,
+		setDegree,
+		setKeyRoot,
+		setPattern,
+		setStyleMode,
+		styleMode,
+	} = useScaleOptions();
+
 	return (
 		<div className="control-plate">
 			<div className="row">
-				<StyleModeSelector />
-				<KeySelector />
+				<StyleModeSelector
+					styleMode={styleMode}
+					setStyleMode={setStyleMode }
+				/>
+				<KeySelector
+					keyRoot={keyRoot}
+					setKeyRoot={setKeyRoot}
+				/>
 			</div>
 			<div className="row">
 				<PatternSelector
