@@ -8,14 +8,15 @@ import { NoteProvider } from '../../context/ScaleContext';
 export const NoteContext = React.createContext();
 
 function App () {
-	const [ tuning, setTuning ] = React.useState(TUNING.EADGBE);
+	const [ tuningKey, setTuningKey ] = React.useState('EADGBE');
+	const tuning = TUNING[tuningKey];
 
 	return (
 		<div className="app">
 			<h1>React Fretboard</h1>
 			<NoteProvider>
 				<ControlPlate>
-					<TuningSelector tuning={tuning} setTuning={setTuning} />
+					<TuningSelector tuningKey={tuningKey} setTuningKey={setTuningKey} />
 				</ControlPlate>
 				<Neck tuning={tuning} />
 			</NoteProvider>

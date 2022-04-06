@@ -5,28 +5,28 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { TUNING } from '../../constants';
 
 const tuningOptions = Object.entries(TUNING).map(
-	([ key, { label } ]) => ({ key, label })
+	([ tuningKey, { label } ]) => ({ tuningKey, label })
 );
 
-function TuningSelector ({ tuning, setTuning }) {
-	function handleChange (_event, tuningKey) {
-		setTuning(TUNING[tuningKey]);
+function TuningSelector ({ tuningKey, setTuningKey }) {
+	function handleChange (_event, updatedTuningKey) {
+		setTuningKey(updatedTuningKey);
 	}
 
 	return (
 		<div className='style-mode-selector'>
 			<ToggleButtonGroup
-				value={tuning}
+				value={tuningKey}
 				exclusive
 				onChange={handleChange}
 				aria-label="Style Mode"
 				size="small"
 			>
 				{
-					tuningOptions.map(({ key, label }) => (
+					tuningOptions.map(({ tuningKey, label }) => (
 						<ToggleButton
-							key={key}
-							value={key}
+							key={tuningKey}
+							value={tuningKey}
 							aria-label={label}
 						>
 							{ label}
