@@ -5,7 +5,7 @@ import StyleModeSelector from './StyleModeSelector';
 import KeySelector from './KeySelector';
 import { useScaleOptions } from '../../context/ScaleContext';
 
-export default function ControlPlate () {
+export default function ControlPlate ({ children }) {
 	const {
 		degree,
 		degreeOptions,
@@ -21,6 +21,9 @@ export default function ControlPlate () {
 
 	return (
 		<div className="control-plate">
+			<div className="row">
+				{ children }
+			</div>
 			<div className="row">
 				<StyleModeSelector
 					styleMode={styleMode}
