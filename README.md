@@ -1,4 +1,23 @@
-# Getting Started with Create React App
+# React Fretboard
+
+This is currently in development.  For outstanding issues please read TODO.md. e.g. Mixolydian mode currently shows sharps when it should show flats.
+
+## Prerequisites
+* Ensure Node.js is installed.
+
+## Getting started
+* `npm i` to install
+* `npm start` to run in a browser at: http://localhost:3000
+
+## To use
+Ensure the tuning matches your guitar, by default it is set to Spanish tuning, i.e. E A D G B E.
+
+Select the root note of the key you wish to play in.
+
+
+<hr />
+
+## Development
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
