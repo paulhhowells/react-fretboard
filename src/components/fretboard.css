@@ -19,7 +19,7 @@
 }
 .fretboard__note > text {
 	fill: #222;
-	font-size: 0.75rem;
+	font-size: 0.5em;
 	font-weight: 700;
 }
 .fretboard__note--flat {
