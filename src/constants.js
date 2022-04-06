@@ -220,14 +220,27 @@ export const STYLE_MODE_OPTIONS = Object.freeze({
 	},
 });
 
+const C = 0;
+const Db = 1;
+const D = 2;
+const Eb = 3;
+const E = 4;
+// const F = 5; // unused
+const Gb = 6;
+const G = 7;
+const Ab = 8;
+const A = 9;
+const Bb = 10;
+const B = 11;
 
 // TODO: replace open string pitches.
 export const TUNING = Object.freeze({
 	// Notes are listed low to high, then reversed.
-	EADGBE: { label: 'Spanish', notes: [ 4, 9, 2, 7, 11, 4 ].reverse() },
-	E_FLAT: { label: 'E flat', notes: [ 3, 8, 1, 6, 10, 3 ].reverse() },
-	DADGAD: { label: 'DADGAD', notes: [ 2, 9, 2, 7, 9, 2 ].reverse() },
-	DADGBD: { label: 'Double Drop D', notes: [ 2, 9, 2, 7, 11, 2 ].reverse() },
+	EADGBE: { label: 'Spanish', notes: [ E, A, D, G, B, E ].reverse() },
+	E_FLAT: { label: 'E flat', notes: [ Eb, Ab, Db, Gb, Bb, Eb ].reverse() },
+	DADGAD: { label: 'DADGAD', notes: [ D, A, D, G, A, D ].reverse() },
+	DADGBD: { label: 'Double Drop D', notes: [ D, A, D, G, B, D ].reverse() },
+	CEGACE: { label: 'C6', notes: [ C, E, G, A, C, E ].reverse() },
 });
 
 // Enum
