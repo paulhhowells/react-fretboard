@@ -34,6 +34,8 @@ const DEGREE_LABEL = Object.freeze({
 
 export const degreeLabels = Object.values(DEGREE_LABEL);
 
+// TODO: refactor this to avoid doing 'clever' things with regex,
+// just store the data in an object.
 export const PATTERN_TYPE = Object.freeze({
 	// diatonic
 	DIATONIC: 'scale.diatonic',
