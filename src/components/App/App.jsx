@@ -1,10 +1,12 @@
 import React from 'react';
+
 import ControlPlate from '../ControlPlate';
 import Neck from '../Neck';
 import TuningSelector from '../ControlPlate/TuningSelector';
 import NoteLabellingSelector from '../ControlPlate/NoteLabellingSelector';
 import { TUNING, NOTE_LABELLING_OPTIONS } from '../../constants';
 import { NoteProvider } from '../../context/ScaleContext';
+import Settings from '../Settings';
 
 export const NoteContext = React.createContext();
 
@@ -17,10 +19,14 @@ function App () {
 
 	return (
 		<div className="app">
-			<h1>React Fretboard <span className="h1-section">Prototype</span></h1>
+			<header className="app-header">
+				<h1>React Fretboard <span className="h1-section">Prototype</span></h1>
+				<Settings>
+					<TuningSelector tuningKey={tuningKey} setTuningKey={setTuningKey} />
+				</Settings>
+			</header>
 			<NoteProvider>
 				<ControlPlate>
-					<TuningSelector tuningKey={tuningKey} setTuningKey={setTuningKey} />
 					<NoteLabellingSelector
 						noteLabelling={noteLabelling}
 						setNoteLabelling={setNoteLabelling}

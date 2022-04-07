@@ -18,13 +18,18 @@ body {
 }
 
 .app {}
-.app > h1 {
+.app-header {
+	display: flex;
+	justify-content: space-between;
+
+}
+.app-header > h1 {
 	margin: 0.25em 0.5em;
 	font-weight: 800;
   color: #FFF;
   text-shadow: 0 2px 3px #0007;
 }
-.app > h1 > .h1-section {
+.app-header > h1 > .h1-section {
 	font-weight: 200;
 	text-shadow: 0 1px 1px #0004;
 }
