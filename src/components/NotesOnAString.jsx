@@ -11,10 +11,7 @@ export default function NotesOnAString ({
 	offsetY = 0,
 	noteLabelling,
 }) {
-	const [ string, setString ] = React.useState([]);
-
-	// TODO refactor, replace useEffect as no side effects!
-	React.useEffect(
+	const string = React.useMemo(
 		() => {
 			// List all of the available frets:
 			const frets = Array(numberOfFrets).fill({});
@@ -28,6 +25,7 @@ export default function NotesOnAString ({
 						x: calculateFretX(position),
 					})
 				)
+				// TODO: move filter before map.
 				.filter( // List only the notes on the string:
 					fret => notes.has(fret.note)
 				)
@@ -38,7 +36,7 @@ export default function NotesOnAString ({
 					})
 				);
 
-			setString(string);
+			return string;
 		},
 		[ nut, notes, numberOfFrets, calculateFretX ]
 	);
