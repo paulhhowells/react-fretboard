@@ -290,26 +290,32 @@ function notesFromPattern ({
 
 		// TODO: check, does degreeIndex work?
 
-		// TODO: add intervalLabel & intervalSemitone
-
-		const scale = (degreeIndex === 0)
+		// Scale. Number matches one of 12 notes.
+		const modeScale = (degreeIndex === 0)
 			? patternNotes
 			: [
 				...patternNotes.slice(degreeIndex),
 				...patternNotes.slice(0, degreeIndex),
 			];
 
-		const notes = scale
-			.map(note => ((rootNote + note) % 12))
-			.map((note, index) => ({
+		const notes = modeScale.map((modeNote, index, array) => {
+			const note = (rootNote + modeNote) % 12;
+			const noteLabel = twelveNoteDescription[note];
+			const intervalSemitone = (modeNote - array[0] + 12) % 12;
+			const difference = intervalSemitone - patternNotes[index]; // -ve for flat, +ve for sharp.
+			const intervalLabel = getIntervalString(index, difference);
+
+			return {
+				intervalLabel,
+				intervalSemitone,
+				modeNote,
 				note,
-				noteLabel: twelveNoteDescription[note],
-				// intervalLabel,
-				// intervalSemitone,
-				degree: (index + degreeIndex) % scale.length,
-				sign: sign(twelveNoteDescription[note]),
+				noteLabel,
+				degree: (index + degreeIndex) % array.length,
+				sign: sign(noteLabel),
 				type: patternType,
-			}));
+			};
+		});
 
 		return notes;
 	}
