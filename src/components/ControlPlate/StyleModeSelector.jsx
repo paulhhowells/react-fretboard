@@ -5,8 +5,8 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { STYLE_MODE } from '../../hooks/useNotes/constants';
 
 const styleModeOptions = [
-	{ key: STYLE_MODE.DIATONIC, label: 'Diatonic mode' },
-	{ key: STYLE_MODE.BLUES, label: 'Blues mode' },
+	{ key: STYLE_MODE.DIATONIC, label: 'Diatonic' },
+	{ key: STYLE_MODE.BLUES, label: 'Blues' },
 ];
 
 function StyleModeSelector ({ styleMode, setStyleMode }) {
