@@ -25,7 +25,6 @@ export default function NotesOnAString ({
 						x: calculateFretX(position),
 					})
 				)
-				// TODO: move filter before map.
 				.filter( // List only the notes on the string:
 					fret => notes.has(fret.note)
 				)
