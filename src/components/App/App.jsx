@@ -17,7 +17,7 @@ function App () {
 
 	return (
 		<div className="app">
-			<h1>React Fretboard</h1>
+			<h1>React Fretboard <span className="h1-section">Prototype</span></h1>
 			<NoteProvider>
 				<ControlPlate>
 					<TuningSelector tuningKey={tuningKey} setTuningKey={setTuningKey} />
