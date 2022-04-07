@@ -1,11 +1,12 @@
 # TO DO
 
 ## Features
-* [ ] note types for styling, e.g. passing b5
-* [ ] option to show notes as intervals / scale degrees
-* [ ] layers, e.g. scale layer over chord layer
-* [ ] settings view
+* [x] note types for styling, e.g. passing b5
+* [x] option to show notes as intervals / scale degrees
+* [ ] layers, e.g. scale layer over chord layer, or shadow chord layer over scale
+* [x] settings view
 * [x] add setting > select tuning
+* [x] pale notes at nut
 * summary text
 * make design responsive, e.g. fretboard width
 * string muting
@@ -23,9 +24,9 @@
 * [x] roll fretboard edges (reduce edge to string distance)
 
 ## Fix
-* [ ] mixolydian flat notes - improve use of flats & sharps
+* [x] mixolydian flat notes - improve use of flats & sharps
 * [x] diatonic degrees
-* [ ] fix font size in note
+* [x] fix font size in note
 * [ ] font for sharp & flat spacing
 
 ## Refactor
