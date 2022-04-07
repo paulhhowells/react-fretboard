@@ -17,14 +17,13 @@ const ACTION_TYPE = Object.freeze({
 });
 
 // TODO: save state in local storage
-const defaultStyleMode = STYLE_MODE.BLUES;
+const defaultStyleMode = STYLE_MODE.DIATONIC;
 const initialNoteState = {
-	keyRoot: KEY.A,
+	keyRoot: KEY.C,
 	degree: 0,
 	notes: new Map([]),
 	// pattern: STYLE_MODE_OPTIONS[defaultStyleMode].patternOptions[3].pattern,
-	pattern: PATTERN.MAJOR_BLUES,
-	rootNote: 9, // A // TODO: superfluous?
+	pattern: PATTERN.TRIAD,
 	styleMode: defaultStyleMode,
 };
 
