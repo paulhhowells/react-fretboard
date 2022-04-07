@@ -327,3 +327,8 @@ const KEY_LIST = [
 ];
 
 export const keySelectOptions = KEY_LIST.map(id => ({ id, label: KEY_DEFINITION[id].label }));
+
+export const NOTE_LABELLING_OPTIONS = [
+	{ key: 'NAME', label: 'Name' },
+	{ key: 'INTERVAL', label: 'Interval' },
+];

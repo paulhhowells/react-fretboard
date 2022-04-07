@@ -1,12 +1,24 @@
+import { NOTE_LABELLING_OPTIONS } from '../constants';
+
+const INTERVAL = NOTE_LABELLING_OPTIONS[1].label; // TODO refactor to be less fragile
 const elementClassName = 'fretboard__note';
 
-export default function Note ({ note }) {
-	const { degree, noteLabel, sign, x, keyRoot, scaleRoot } = note;
+export default function Note ({ note, noteLabelling }) {
+	const {
+		degree,
+		noteLabel,
+		intervalLabel,
+		sign,
+		x,
+		keyRoot,
+		scaleRoot,
+	 } = note;
 	const radius = 8; // TODO: move to constants
 	let className = elementClassName;
 
-	// TODO: intervalLabel
-	const label = noteLabel;
+	const label = (noteLabelling === INTERVAL)
+		? intervalLabel
+		: noteLabel;
 
 	if (sign.length > 0) {
 		// Signal sharp or flat with a modifier.

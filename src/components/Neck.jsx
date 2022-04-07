@@ -4,7 +4,7 @@ import Fretboard from './Fretboard';
 import { FRET_MODE } from '../constants';
 import { useFretboard, useSettings } from '../hooks';
 
-export default function Neck ({	tuning }) {
+export default function Neck ({	tuning, noteLabelling }) {
 	const {
 		fretMode = FRET_MODE.EVEN,
 		numberOfStrings = 6,
@@ -33,6 +33,7 @@ export default function Neck ({	tuning }) {
 				numberOfFrets={numberOfFrets}
 				calculateFretX={calculateFretX}
 				tuning={tuning}
+				noteLabelling={noteLabelling}
 			/>
 		</svg>
 	);

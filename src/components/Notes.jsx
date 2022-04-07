@@ -10,6 +10,7 @@ export default function Notes ({
 	numberOfFrets,
 	calculateFretX,
 	tuning,
+	noteLabelling,
 }) {
 	const notes = useScaleNotes();
 
@@ -27,6 +28,7 @@ export default function Notes ({
 						offsetY={index * STRING_TO_STRING_VERTICAL_OFFSET}
 						key={openStringPitch + '-' + index}
 						calculateFretX={calculateFretX}
+						noteLabelling={noteLabelling}
 					/>)
 				)
 			}

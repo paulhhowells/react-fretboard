@@ -9,9 +9,11 @@ export default function NotesOnAString ({
 	notes,
 	numberOfFrets,
 	offsetY = 0,
+	noteLabelling,
 }) {
 	const [ string, setString ] = React.useState([]);
 
+	// TODO refactor, replace useEffect as no side effects!
 	React.useEffect(
 		() => {
 			// List all of the available frets:
@@ -47,6 +49,7 @@ export default function NotesOnAString ({
 				string.map(note => (<Note
 					note={note}
 					key={note.noteLabel + note.position}
+					noteLabelling={noteLabelling}
 				/>))
 			}
 		</g>
