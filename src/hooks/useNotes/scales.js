@@ -14,7 +14,7 @@ const notation = {
 const PATTERN = {
 	// Scale. Number matches one of 12 notes.
 	scale: {
-	//					1  2  3  4  5  6  7
+		//					1  2  3  4  5  6  7
 		diatonic: [ 0, 2, 4, 5, 7, 9, 11 ],
 	},
 	// Diatonic. Number matches one of 7 degrees, and
@@ -23,7 +23,7 @@ const PATTERN = {
 		triad: [ 0, 2, 4 ],
 		seventhChord: [ 0, 2, 4, 6 ],
 
-		// TODO use I II III IV keys
+		// TODO: use I II III IV keys
 		pentatonic: {
 			'0': [ 0, 1, 2, 4, 5 ], // I
 			'1': [ 0, 2, 3, 4, 6 ],	// ii-
@@ -34,19 +34,43 @@ const PATTERN = {
 			'6': [ 0, 2, 4, 5, 6 ],	// VII /º ?
 		},
 	},
-	// Modal: Number matches one of 12 notes.
+	// Modal: interval number matches one of 12 notes.
 	modal: {
-		dominantSeventhChord: [ 0, 4, 7, 10 ],
-		mixolydian: [ 0, 2, 4, 5, 7, 9, 10 ],
-		majorBlues: [ 0, 2, 3, 4, 7, 9 ],
-		minorBlues: [ 0, 3, 5, 6, 7, 10 ],
-		diad_3_7: [ 4, 10 ],
-	}
+		dominantSeventhChord: {
+			intervals: [ 0, 4, 7, 10 ],
+			intervalLabels: [ '1', '3', '5', '♭7' ],
+			// mode: 7,
+		},
+		mixolydian: {
+			intervals: [ 0, 2, 4, 5, 7, 9, 10 ],
+			intervalLabels: [ '1', '2', '3', '4', '5', '6', '♭7' ],
+			// mode: 7,
+		},
+		majorBlues: {
+			intervals: [ 0, 2, 3, 4, 7, 9 ],
+			intervalLabels: [ '1', '2', '♭3', '3', '5', '6' ],
+			passingNotes: [ 3 ],
+		},
+		minorBlues: {
+			intervals: [ 0, 3, 5, 6, 7, 10 ],
+			intervalLabels: [ '1', '♭3', '4', '♭5', '5', '♭7' ],
+			passingNotes: [ 6 ],
+		},
+		// TODO rename to dominant diad
+		diad_3_7: {
+			intervals: [ 4, 10 ],
+			intervalLabels: [ '3', '♭7' ],
+			// mode: 7,
+		},
+	},
 };
 
-const ENHARMONIC = {
+
+const ENHARMONIC_LABEL = {
 	sharp: [ 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B' ],
 	flat: [ 'C', 'D♭', 'D', 'E♭', 'E', 'F', 'G♭', 'G', 'A♭', 'A', 'B♭', 'B' ],
+	// doubleFlat: [ 'D𝄫', 'D', 'E𝄫', 'F𝄫', 'Fb', 'G𝄫', 'G', 'A𝄫', 'A', 'B𝄫', 'B', 'C' ],
+	// natural: [ 'C♮', 'D♭', 'D♮' ],
 };
 
 const patternRegex = /(\w+)(\.)(.*)/i;
@@ -68,6 +92,7 @@ function getIntervalString (degreeIndex, semitones) {
 	return sign.repeat(Math.abs(semitones)) + degree;
 }
 
+// TODO: cater for double flats.
 const sign = label =>	label && label.includes('♭')
 	? 'flat'
 	: label && label.includes('♯')
@@ -101,7 +126,7 @@ export const deriveNotes = ({
 		? KEY_SIGN.FLAT
 		: KEY_SIGN.SHARP;
 
-	const twelveNoteDescription = ENHARMONIC[keySign];
+	const twelveNoteDescription = ENHARMONIC_LABEL[keySign];
 
 	const pattern = PATTERN_TYPE[patternId];
 	const patternMatch = pattern.match(patternRegex);
@@ -120,6 +145,8 @@ export const deriveNotes = ({
 		twelveNoteDescription,
 	});
 
+	console.log(notes);
+
 	return {
 		notes: new Map(
 			notes.map(definition => ([ definition.note, definition ]))
@@ -135,6 +162,19 @@ export const deriveNotes = ({
 	};
 };
 
+function getModalNoteLabel (note, modeInterval) {
+	// TODO: cater for double flats?
+
+	// This logic does not explictly cater for naturals or double flats,
+	// however a natural note assigned to flat will still find its natural note
+	// within ENHARMONIC_LABEL.
+	// This is probably an oversimplification which works at the moment, but may
+	// be insufficient as functionality is added.
+	const keySign = (sign(modeInterval) === 'sharp') ? 'sharp' : 'flat';
+
+	return ENHARMONIC_LABEL[keySign][note];
+}
+
 function notesFromPattern ({
 	degreeIndex,
 	patternNotes,
@@ -145,6 +185,7 @@ function notesFromPattern ({
 	const diatonic = PATTERN.scale.diatonic; // [ 0, 2, 4, 5, 7, 9, 11
 
 	if (patternType === 'diatonic') {
+		// N.B. degreeIndex provides the mode of the diatonic.
 		// For II Dorian mode of C, this is D E F G A B C - 2, 4, 5, 7, 9, 11, 0
 		const modeScale = (degreeIndex === 0)
 			? diatonic
@@ -158,14 +199,14 @@ function notesFromPattern ({
 		// Calculate all the intervals for each degree of the
 		// scale, not just those that will be used by the pattern.
 		const intervals = modeScale.map((value, index, array) => {
-			const intervalSemitones = (value - array[0] + 12) % 12;
+			const intervalSemitone = (value - array[0] + 12) % 12;
 			const diatonicSemitones = diatonic[index];
-			const difference = intervalSemitones - diatonicSemitones; // -ve for flat, +ve for sharp.
-			const label = getIntervalString(index, difference);
+			const difference = intervalSemitone - diatonicSemitones; // -ve for flat, +ve for sharp.
+			const intervalLabel = getIntervalString(index, difference);
 
 			return {
-				label,
-				semitones: intervalSemitones,
+				intervalLabel,
+				intervalSemitone,
 			};
 		});
 
@@ -176,8 +217,8 @@ function notesFromPattern ({
 		const notes = diatonicPattern
 			.map(scaleDegree => {
 				const {
-					label: intervalLabel,
-					semitones,
+					intervalLabel,
+					intervalSemitone,
 				} = intervals[scaleDegree];
 
 				const note = (rootNote + modeScale[scaleDegree]) % 12; // number 0 - 11
@@ -187,7 +228,7 @@ function notesFromPattern ({
 					note,										// Number [0 - 11]
 					noteLabel,
 					intervalLabel,					// Interval as a string.
-					semitones,							// Interval as semitones.
+					intervalSemitone,				// Interval as semitones.
 					degree: scaleDegree,		// Number [0 - 7]
 					sign: sign(noteLabel),	// TODO is this needed?
 					type: patternType,
@@ -198,38 +239,49 @@ function notesFromPattern ({
 
 		return notes;
 	} else if (patternType === 'modal') {
+		// N.B. degreeIndex does NOT provide the mode.
 		const modalRoot = (rootNote + diatonic[degreeIndex]) % 12;
+		const {
+			intervals: modalPattern,
+			intervalLabels,
+			passingNotes = null,
+		} = patternNotes;
 
-		// TODO: LUT for all intervals?
-
-		const modalPattern = (Array.isArray(patternNotes))
-			? patternNotes
-			: patternNotes[degreeIndex];
+		console.log('> modal modalPattern', patternNotes);
 
 		const notes = modalPattern
-			.map(modalNote => ([
+			.map((modalNote, index) => ([
 				modalNote,
 				(modalNote + modalRoot) % 12,
+				intervalLabels[index],
 			]))
-			.map(([ modalNote, note ]) => ({
-				note,
-				noteLabel: twelveNoteDescription[note],
-				sign: sign(twelveNoteDescription[note]),
-				type: patternType,
+			.map(([ intervalSemitone, note, intervalLabel ]) => {
+				const noteLabel = getModalNoteLabel(note, intervalLabel);
 
-				// TODO:
-				// think about picking 1, 4, 5, and then
-				// major or minor, and 1, 4, 5, & 1m, 4m, 5m, over 1 4 5
-				// and minor blues
-				// and what if it's modal not blues and needs sharps,
-				// jazz?!
-				// interval: bluesInterval({ modalNote, modalRoot, note }),
-				interval: BLUES_INTERVAL[modalNote],
+				return {
+					note,
+					noteLabel,
+					intervalLabel,
+					intervalSemitone,
+					sign: sign(noteLabel),
+					type: patternType,
 
-				// TODO: use these to add css blues classes
-				...(note === rootNote && { keyRoot: true }),
-				...(modalNote === 0 && { scaleRoot: true }),
-			}));
+					// TODO, use only one interval system
+					// TODO:
+					// think about picking 1, 4, 5, and then
+					// major or minor, and 1, 4, 5, & 1m, 4m, 5m, over 1 4 5
+					// and minor blues
+					// and what if it's modal not blues and needs sharps,
+					// jazz?!
+					// interval: bluesInterval({ modalNote, modalRoot, note }),
+					bluesIntervalLabel: BLUES_INTERVAL[intervalSemitone],
+
+					// TODO: use these to add css blues classes
+					...(note === rootNote && { keyRoot: true }),
+					...(intervalSemitone === 0 && { scaleRoot: true }),
+					...(passingNotes?.includes(intervalSemitone) && { passingNote: true }),
+				};
+			});
 
 		return notes;
 	} else if (patternType === 'scale') {
@@ -237,6 +289,8 @@ function notesFromPattern ({
 		// in the pattern being the index of one of the 12 notes available.
 
 		// TODO: check, does degreeIndex work?
+
+		// TODO: add intervalLabel & intervalSemitone
 
 		const scale = (degreeIndex === 0)
 			? patternNotes
@@ -250,6 +304,8 @@ function notesFromPattern ({
 			.map((note, index) => ({
 				note,
 				noteLabel: twelveNoteDescription[note],
+				// intervalLabel,
+				// intervalSemitone,
 				degree: (index + degreeIndex) % scale.length,
 				sign: sign(twelveNoteDescription[note]),
 				type: patternType,
