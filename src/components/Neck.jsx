@@ -1,19 +1,21 @@
 import React from 'react';
 import Notes from './Notes';
 import Fretboard from './Fretboard';
-import { FRET_MODE } from '../constants';
 import { useFretboard, useSettings } from '../hooks';
 
-export default function Neck ({	tuning, noteLabelling }) {
+export default function Neck ({
+	fretSpacing,
+	tuning,
+	noteLabelling,
+}) {
 	const {
-		fretMode = FRET_MODE.EVEN,
 		numberOfStrings = 6,
 
 		// Includes the nut as fret 0, so for 1 nut + 24 frets use 25.
 		numberOfFrets = 13,
 	} = useSettings();
 
-	const { fretboardHeight, fretboardWidth, calculateFretX } = useFretboard({ fretMode, numberOfFrets, numberOfStrings });
+	const { fretboardHeight, fretboardWidth, calculateFretX } = useFretboard({ fretSpacing, numberOfFrets, numberOfStrings });
 
 	return (
 		<svg

@@ -1,12 +1,13 @@
 import React from 'react';
 
+import { FRET_SPACING, TUNING, NOTE_LABELLING_OPTIONS } from '../../constants';
+import { NoteProvider } from '../../context/ScaleContext';
 import ControlPlate from '../ControlPlate';
 import Neck from '../Neck';
 import TuningSelector from '../ControlPlate/TuningSelector';
 import NoteLabellingSelector from '../ControlPlate/NoteLabellingSelector';
-import { TUNING, NOTE_LABELLING_OPTIONS } from '../../constants';
-import { NoteProvider } from '../../context/ScaleContext';
 import Settings from '../Settings';
+import FretSpacingSelector from '../FretSpacingSelector';
 
 export const NoteContext = React.createContext();
 
@@ -17,12 +18,15 @@ function App () {
 	// TODO refactor into a context.
 	const [ noteLabelling, setNoteLabelling ] = React.useState(NOTE_LABELLING_OPTIONS[0].key);
 
+	const [ fretSpacing, setFretSpacing ] = React.useState(FRET_SPACING.EVEN);
+
 	return (
 		<div className="app">
 			<header className="app-header">
 				<h1>React Fretboard <span className="h1-section">Prototype</span></h1>
 				<Settings>
 					<TuningSelector tuningKey={tuningKey} setTuningKey={setTuningKey} />
+					<FretSpacingSelector fretSpacing={fretSpacing} setFretSpacing={setFretSpacing} />
 				</Settings>
 			</header>
 			<NoteProvider>
@@ -33,6 +37,7 @@ function App () {
 					/>
 				</ControlPlate>
 				<Neck
+					fretSpacing={fretSpacing}
 					tuning={tuning}
 					noteLabelling={noteLabelling}
 				/>

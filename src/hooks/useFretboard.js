@@ -6,11 +6,11 @@ import {
 	FRETBOARD_RIGHT_PAD,
 	STRING_TO_STRING_VERTICAL_OFFSET,
 	STRING_TO_EDGE_OF_FRETBOARD,
-	FRET_MODE,
+	FRET_SPACING,
 } from '../constants';
 
 export const useFretboard = ({
-	fretMode,
+	fretSpacing,
 	numberOfFrets,
 	numberOfStrings,
 }) => {
@@ -19,13 +19,13 @@ export const useFretboard = ({
 
 	const calculateFretX = React.useCallback(
 		position => {
-			if (fretMode === FRET_MODE.RULE_OF_EIGHTEEN) {
+			if (fretSpacing === FRET_SPACING.RULE_OF_EIGHTEEN) {
 				return ruleOfEighteen[position];
 			} else {
 				return position * FRET_TO_FRET_HORIZONTAL_OFFSET;
 			}
 		},
-		[ fretMode, ruleOfEighteen ]
+		[ fretSpacing, ruleOfEighteen ]
 	);
 
 	const { fretboardHeight, fretboardWidth } = React.useMemo(
@@ -33,14 +33,14 @@ export const useFretboard = ({
 			const fretboardHeight = (STRING_TO_EDGE_OF_FRETBOARD * 2) + (STRING_TO_STRING_VERTICAL_OFFSET * (numberOfStrings - 1));
 			const fretboardPadding = FRETBOARD_LEFT_PAD + FRETBOARD_RIGHT_PAD;
 			const fretboardWidth = Math.ceil(
-				(fretMode === FRET_MODE.RULE_OF_EIGHTEEN)
+				(fretSpacing === FRET_SPACING.RULE_OF_EIGHTEEN)
 					? fretboardPadding + ruleOfEighteen[ruleOfEighteen.length - 1]
 					: fretboardPadding + (numberOfFrets * FRET_TO_FRET_HORIZONTAL_OFFSET)
 			);
 
 			return { fretboardWidth, fretboardHeight };
 		},
-		[ fretMode, numberOfFrets, numberOfStrings, ruleOfEighteen ]
+		[ fretSpacing, numberOfFrets, numberOfStrings, ruleOfEighteen ]
 	);
 
 	return { fretboardHeight, fretboardWidth, calculateFretX };
