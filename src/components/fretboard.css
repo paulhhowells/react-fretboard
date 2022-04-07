@@ -25,6 +25,11 @@
 .fretboard__note--flat {
 	/* letter-spacing: -2pt; */
 }
+.fretboard__note--passing > text {
+	fill: #333;
+	font-size: 0.4em;
+	font-weight: 500;
+}
 
 .fretboard__string {
 	fill: #f5f5f5;

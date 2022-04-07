@@ -12,8 +12,10 @@ export default function Note ({ note, noteLabelling }) {
 		x,
 		keyRoot,
 		scaleRoot,
+		passingNote,
 	 } = note;
-	const radius = 8; // TODO: move to constants
+	const radius = (passingNote === true) ? 5 : 8; // TODO: move to constants
+	const dy = (passingNote === true) ? '0.36em' : '0.33em'; // TODO use CSS instead?
 	let className = elementClassName;
 
 	const label = (noteLabelling === INTERVAL)
@@ -41,13 +43,17 @@ export default function Note ({ note, noteLabelling }) {
 		className += ` ${elementClassName}--root`;
 	}
 
+	if (passingNote === true) {
+		className += ` ${elementClassName}--passing`;
+	}
+
 	return (
 		<g transform={`translate(${ x })`} className={className}>
 			<circle cx={-radius} cy="0" r={radius} />
 			<text
 				x={-radius}
 				y="0"
-				dy="0.33em"
+				dy={dy}
 				textAnchor="middle"
 			>
 				{ label }
