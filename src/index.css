@@ -24,6 +24,14 @@ body {
   text-shadow: 0 2px 3px #0007;
 }
 
+.row {
+	display: flex;
+	flex-direction: row;
+}
+.row > div {
+	padding: 0.25em;
+}
+
 .control-plate {
 	padding: 0.25em 1em;
 }
@@ -33,12 +41,9 @@ body {
 
 .MuiToggleButtonGroup-root {
 	background-color: #fff;
+	/* box-shadow: 0 2px 3px #0007; */
 }
 
-.row {
-	display: flex;
-	flex-direction: row;
-}
-.row > div {
-	padding: 0.25em;
+.degree-selector > [role="group"] > button {
+	min-width: 2.5em;
 }
