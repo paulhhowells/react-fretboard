@@ -14,12 +14,12 @@ function TuningSelector ({ tuningKey, setTuningKey }) {
 	}
 
 	return (
-		<div className='style-mode-selector'>
+		<div className='tuning-selector'>
 			<ToggleButtonGroup
 				value={tuningKey}
 				exclusive
 				onChange={handleChange}
-				aria-label="Style Mode"
+				aria-label="Tuning"
 				size="small"
 			>
 				{
