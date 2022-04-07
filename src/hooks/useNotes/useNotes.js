@@ -2,7 +2,6 @@ import React from 'react';
 
 import {
 	KEY,
-	KEY_DEFINITION,
 	PATTERN,
 	STYLE_MODE_OPTIONS,
 } from '../../constants';
@@ -35,8 +34,6 @@ function noteReducer (state, action) {
 			return {
 				...state,
 				keyRoot,
-				// should this be derived elsewhere?
-				rootNote: KEY_DEFINITION[keyRoot].note,
 			};
 		case ACTION_TYPE.UPDATE_NOTES:
 			return {
@@ -85,7 +82,6 @@ export function useNotes () {
 		keyRoot,
 		degree,
 		pattern,
-		rootNote,
 		styleMode,
 	} = state;
 
@@ -137,7 +133,6 @@ export function useNotes () {
 		notes,
 		pattern,
 		patternOptions,
-		rootNote,
 		setDegree,
 		setKeyRoot,
 		setPattern,
