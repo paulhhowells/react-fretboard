@@ -11,6 +11,7 @@ export default function Fretboard ({
 	numberOfFrets,
 	numberOfStrings,
 	calculateFretX,
+	tuning,
 }) {
 	const fretHeight = fretboardHeight;
 	let frets = Array(numberOfFrets).fill(null);
@@ -25,7 +26,7 @@ export default function Fretboard ({
 				className="fretboard__blank"
 			/>
 			<Frets frets={frets} fretHeight={fretHeight}/>
-			<Nut fretboardHeight={fretboardHeight} />
+			<Nut fretboardHeight={fretboardHeight} tuning={tuning} />
 			<Strings fretboardWidth={fretboardWidth} numberOfStrings={numberOfStrings} />
 			<Markers frets={frets} fretHeight={fretHeight} />
 		</g>

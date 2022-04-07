@@ -2,7 +2,7 @@ const elementClassName = 'fretboard__note';
 
 export default function Note ({ note }) {
 	const { degree, noteLabel, sign, x, keyRoot, scaleRoot } = note;
-	const radius = 8;
+	const radius = 8; // TODO: move to constants
 	let className = elementClassName;
 
 	// TODO: intervalLabel

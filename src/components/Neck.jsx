@@ -27,6 +27,7 @@ export default function Neck ({	tuning }) {
 				numberOfFrets={numberOfFrets}
 				numberOfStrings={numberOfStrings}
 				calculateFretX={calculateFretX}
+				tuning={tuning}
 			/>
 			<Notes
 				numberOfFrets={numberOfFrets}

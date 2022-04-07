@@ -37,3 +37,9 @@
 .fretboard__nut {
 	fill: #999;
 }
+
+.fretboard__nut-notes {
+	fill: #bbb;
+	font-size: 0.5em;
+	font-weight: 700;
+}
