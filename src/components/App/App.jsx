@@ -25,8 +25,12 @@ function App () {
 			<header className="app-header">
 				<h1>React Fretboard <span className="h1-section">Prototype</span></h1>
 				<Settings>
-					<TuningSelector tuningKey={tuningKey} setTuningKey={setTuningKey} />
-					<FretSpacingSelector fretSpacing={fretSpacing} setFretSpacing={setFretSpacing} />
+					<div className="row">
+						<TuningSelector tuningKey={tuningKey} setTuningKey={setTuningKey} />
+					</div>
+					<div className="row">
+						<FretSpacingSelector fretSpacing={fretSpacing} setFretSpacing={setFretSpacing} />
+					</div>
 				</Settings>
 			</header>
 			<NoteProvider>
