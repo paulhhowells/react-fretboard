@@ -13,7 +13,7 @@ function App () {
 	const tuning = TUNING[tuningKey];
 
 	// TODO refactor into a context.
-	const [ noteLabelling, setNoteLabelling ] = React.useState(NOTE_LABELLING_OPTIONS[0]);
+	const [ noteLabelling, setNoteLabelling ] = React.useState(NOTE_LABELLING_OPTIONS[0].key);
 
 	return (
 		<div className="app">

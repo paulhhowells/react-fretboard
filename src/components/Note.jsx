@@ -1,6 +1,6 @@
 import { NOTE_LABELLING_OPTIONS } from '../constants';
 
-const INTERVAL = NOTE_LABELLING_OPTIONS[1].label; // TODO refactor to be less fragile
+const INTERVAL = NOTE_LABELLING_OPTIONS[1].key; // TODO refactor to be less fragile
 const elementClassName = 'fretboard__note';
 
 export default function Note ({ note, noteLabelling }) {
