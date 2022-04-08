@@ -1,19 +1,28 @@
 import React from 'react';
-import { FRET_SPACING } from '../constants';
+import {
+	FRET_SPACING,
+	TUNING,
+} from '../constants';
 
 export function useSettings () {
-	// Includes the nut as fret 0, so for 1 nut + 24 frets use 25.
+	// numberOfFrets includes the nut as fret 0, so for 1 nut + 24 frets use 25.
 	const [ numberOfFrets, setNumberOfFrets ] = React.useState(16);
 
 	const [ numberOfStrings, setNumberOfStrings ] = React.useState(6);
-	const [ fretMode, setFretMode ] = React.useState(FRET_SPACING.EVEN);
+	const [ fretSpacing, setFretSpacing ] = React.useState(FRET_SPACING.EVEN);
+	const [ tuningKey, setTuningKey ] = React.useState('EADGBE');
+
+	const tuning = TUNING[tuningKey];
 
 	return {
-		fretMode,
+		fretSpacing,
 		numberOfFrets,
 		numberOfStrings,
-		setFretMode,
+		setFretSpacing,
 		setNumberOfFrets,
 		setNumberOfStrings,
+		setTuningKey,
+		tuning,
+		tuningKey,
 	 };
 }

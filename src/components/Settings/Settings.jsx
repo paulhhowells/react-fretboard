@@ -4,6 +4,9 @@ import Button from '@mui/material/Button';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CloseIcon from '@mui/icons-material/Close';
 
+import { useSettingsContext } from '../../context/SettingsContext';
+import TuningSelector from '../ControlPlate/TuningSelector';
+import FretSpacingSelector from '../FretSpacingSelector';
 import './settings.css';
 
 export default function Settings ({ children }) {
@@ -15,6 +18,10 @@ export default function Settings ({ children }) {
 
 		setState(open);
 	};
+	const {
+		fretSpacing, setFretSpacing,
+		tuningKey, setTuningKey,
+	} = useSettingsContext();
 
 	return (
 		<>
@@ -28,7 +35,18 @@ export default function Settings ({ children }) {
 			>
 				<section className="settings-box">
 					<Button onClick={toggleDrawer(false)}><CloseIcon /></Button>
-					<h2>Settings</h2>
+					<div className="row">
+						<TuningSelector
+							tuningKey={tuningKey}
+							setTuningKey={setTuningKey}
+						/>
+					</div>
+					<div className="row">
+						<FretSpacingSelector
+							fretSpacing={fretSpacing}
+							setFretSpacing={setFretSpacing}
+						/>
+					</div>
 					{ children }
 				</section>
 			</Drawer>
