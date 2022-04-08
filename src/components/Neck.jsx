@@ -4,10 +4,11 @@ import { useFretboard } from '../hooks';
 import Notes from './Notes';
 import Fretboard from './Fretboard';
 
-export default function Neck ({ noteLabelling }) {
+export default function Neck () {
 	// numberOfFrets includes the nut as fret 0, so for 1 nut + 24 frets use 25.
 	const {
 		fretSpacing,
+		noteLabelling,
 		numberOfFrets = 13,
 		numberOfStrings = 6,
 		tuning,

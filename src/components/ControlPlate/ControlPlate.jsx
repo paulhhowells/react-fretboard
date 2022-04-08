@@ -1,9 +1,12 @@
 import React from 'react';
+import { useScaleOptions } from '../../context/ScaleContext';
+import { useSettingsContext } from '../../context/SettingsContext';
+
 import DegreeSelector from './DegreeSelector';
 import PatternSelector from './PatternSelector';
 import StyleModeSelector from './StyleModeSelector';
 import KeySelector from './KeySelector';
-import { useScaleOptions } from '../../context/ScaleContext';
+import NoteLabellingSelector from './NoteLabellingSelector';
 
 export default function ControlPlate ({ children }) {
 	const {
@@ -18,6 +21,10 @@ export default function ControlPlate ({ children }) {
 		setStyleMode,
 		styleMode,
 	} = useScaleOptions();
+	const {
+		noteLabelling,
+		setNoteLabelling,
+	} = useSettingsContext();
 
 	return (
 		<div className="control-plate">
@@ -44,6 +51,12 @@ export default function ControlPlate ({ children }) {
 					degreeOptions={degreeOptions}
 					degree={degree}
 					setDegree={setDegree}
+				/>
+			</div>
+			<div className='row'>
+				<NoteLabellingSelector
+					noteLabelling={noteLabelling}
+					setNoteLabelling={setNoteLabelling}
 				/>
 			</div>
 		</div>
