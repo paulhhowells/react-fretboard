@@ -1,20 +1,38 @@
-import React from 'react';
 import {
 	FRET_SPACING,
 	NOTE_LABELLING_OPTIONS,
 	TUNING,
 } from '../constants';
+import { usePersistence } from '../hooks';
 
 export function useSettings () {
-	const [ noteLabelling, setNoteLabelling ] = React.useState(NOTE_LABELLING_OPTIONS[0].key);
+	const { persistState, currentState } = usePersistence({
+		id: 'settings',
+		defaultState: {
+			fretSpacing: FRET_SPACING.EVEN,
+			noteLabelling: NOTE_LABELLING_OPTIONS[0].key,
 
-	// numberOfFrets includes the nut as fret 0, so for 1 nut + 24 frets use 25.
-	const [ numberOfFrets, setNumberOfFrets ] = React.useState(16);
+			// numberOfFrets includes the nut as fret 0, so for 1 nut + 24 frets use 25.
+			numberOfFrets: 16,
 
-	const [ numberOfStrings, setNumberOfStrings ] = React.useState(6);
-	const [ fretSpacing, setFretSpacing ] = React.useState(FRET_SPACING.EVEN);
-	const [ tuningKey, setTuningKey ] = React.useState('EADGBE');
+			numberOfStrings: 6,
+			tuningKey: 'EADGBE',
+		}
+	});
 
+	const setFretSpacing = fretSpacing => persistState('fretSpacing', fretSpacing);
+	const setNoteLabelling = noteLabelling => persistState('noteLabelling', noteLabelling);
+	const setNumberOfFrets = numberOfFrets => persistState('numberOfFrets', numberOfFrets);
+	const setNumberOfStrings = numberOfStrings => persistState('numberOfStrings', numberOfStrings);
+	const setTuningKey = tuningKey => persistState('tuningKey', tuningKey);
+
+	const {
+		fretSpacing,
+		noteLabelling,
+		numberOfFrets,
+		numberOfStrings,
+		tuningKey,
+	 } = currentState;
 	const tuning = TUNING[tuningKey];
 
 	return {
