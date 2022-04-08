@@ -6,8 +6,6 @@ import ControlPlate from '../ControlPlate';
 import Neck from '../Neck';
 import Settings from '../Settings';
 
-export const NoteContext = React.createContext();
-
 function App () {
 	return (
 		<div className="app">

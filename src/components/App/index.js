@@ -1,1 +1,1 @@
-export { default, NoteContext } from './App';
+export { default } from './App';
