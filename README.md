@@ -1,6 +1,6 @@
 # React Fretboard
 
-This is currently in development.  For outstanding issues please read TODO.md. e.g. Mixolydian mode currently shows sharps when it should show flats.
+This is currently in development.  For outstanding issues please read TODO.md.
 
 ## Prerequisites
 * Ensure Node.js is installed.
@@ -10,10 +10,10 @@ This is currently in development.  For outstanding issues please read TODO.md. e
 * `npm start` to run in a browser at: http://localhost:3000
 
 ## To use
-Ensure the tuning matches your guitar, by default it is set to Spanish tuning, i.e. E A D G B E.
+Ensure the tuning matches your guitar, by default it is set to Spanish tuning, i.e. E A D G B E.  Tuning options are available in the Settings section (open it using the button in the top right hand corner).
 
-Select the root note of the key you wish to play in.
-
+1. Select the root note of the key you wish to play in.
+2. Select the scale or chord notes you want to see on the fretboard.
 
 <hr />
 
