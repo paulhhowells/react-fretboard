@@ -8,11 +8,17 @@ export const usePersistence = ({ id, userName, defaultState = {} }) => {
 		+ ((id) ? '.' + id : '');
 
 	const initState = () => {
-		// const defaultState = {};
 		const state = localStorage.getItem(persistenceNamespace);
 		const initialState = (state !== null && state !== undefined)
 			? JSON.parse(state)
-			: defaultState;
+			: {};
+
+		for (const key in defaultState) {
+			if ((key in initialState) === false) {
+				initialState[key] = defaultState[key];
+			}
+		}
+
 		return initialState;
 	};
 
