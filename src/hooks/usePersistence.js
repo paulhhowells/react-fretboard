@@ -2,7 +2,22 @@ import React from 'react';
 
 const APP_NAME = process.env.REACT_APP_NAME;
 
-export const usePersistence = ({ id, userName, defaultState = {} }) => {
+export const usePersistence = ({
+	id,
+	userName,
+	defaultState = {},
+	// Enable finer grained updating of state shape targetted by app version.
+	// Inversion of control allows upgradeState to be overwritten, for example when
+	// a breaking change is made, and currentVersion is supplied for this purpose.
+	upgradeState = (initialState, defaultState, currentVersion) => {
+		for (const key in defaultState) {
+			if ((key in initialState) === false) {
+				initialState[key] = defaultState[key];
+			}
+		}
+		initialState.appVersion = currentVersion;
+	},
+}) => {
 	const persistenceNamespace = APP_NAME
 		+ ((userName) ? '.' + userName : '')
 		+ ((id) ? '.' + id : '');
@@ -13,11 +28,7 @@ export const usePersistence = ({ id, userName, defaultState = {} }) => {
 			? JSON.parse(state)
 			: {};
 
-		for (const key in defaultState) {
-			if ((key in initialState) === false) {
-				initialState[key] = defaultState[key];
-			}
-		}
+		upgradeState(initialState, defaultState, process.env.REACT_APP_VERSION);
 
 		return initialState;
 	};
