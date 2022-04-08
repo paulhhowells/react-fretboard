@@ -21,3 +21,5 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+console.log(`%c ${process.env.REACT_APP_VERSION} `, 'background: #222; color: #ec0; padding: 0.25em; font-size: 1.25em;');
