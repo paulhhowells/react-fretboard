@@ -145,8 +145,6 @@ export const deriveNotes = ({
 		twelveNoteDescription,
 	});
 
-	console.log(notes);
-
 	return {
 		notes: new Map(
 			notes.map(definition => ([ definition.note, definition ]))
@@ -247,8 +245,6 @@ function notesFromPattern ({
 			intervalLabels,
 			passingNotes = null,
 		} = patternNotes;
-
-		console.log('> modal modalPattern', patternNotes);
 
 		const notes = modalPattern
 			.map((modalNote, index) => ([
