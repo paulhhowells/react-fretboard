@@ -234,6 +234,7 @@ function notesFromPattern ({
 					type: patternType,
 
 					...(note === rootNote && { keyRoot: true }),
+					...(intervalSemitone === 0 && { scaleRoot: true }),
 				};
 			});
 
@@ -288,8 +289,6 @@ function notesFromPattern ({
 		// Derive a set of notes from the key, each number
 		// in the pattern being the index of one of the 12 notes available.
 
-		// TODO: check, does degreeIndex work?
-
 		// Scale. Number matches one of 12 notes.
 		const modeScale = (degreeIndex === 0)
 			? patternNotes
@@ -314,6 +313,8 @@ function notesFromPattern ({
 				degree: (index + degreeIndex) % array.length,
 				sign: sign(noteLabel),
 				type: patternType,
+				...(note === rootNote && { keyRoot: true }),
+				...(intervalSemitone === 0 && { scaleRoot: true }),
 			};
 		});
 

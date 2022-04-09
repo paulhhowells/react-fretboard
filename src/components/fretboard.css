@@ -14,9 +14,20 @@
 	stroke: #bbb;
 	stroke-width: 0.125;
 }
-.fretboard__note--root > circle {
-	stroke: #c00;
+/* .fretboard__note--root > circle {} // when degree === 0 */
+
+/* when note matches the key root note */
+.fretboard__note--key-root > circle {
+	stroke: #ec05;
+	stroke-width: 1;
 }
+
+/* when note matches the root of the pattern, e.g. the mode or degree */
+.fretboard__note--scale-root > circle {
+	stroke: #00c5;
+	stroke-width: 0.5;
+}
+
 .fretboard__note > text {
 	fill: #222;
 	font-size: 0.5em;
