@@ -47,6 +47,11 @@ export default function Settings ({ children }) {
 							setFretSpacing={setFretSpacing}
 						/>
 					</div>
+					{/*
+					<div className="row">
+						 TODO toggle note styling
+					</div>
+					*/}
 					{ children }
 				</section>
 			</Drawer>
