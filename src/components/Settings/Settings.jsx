@@ -5,8 +5,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { useSettingsContext } from '../../context/SettingsContext';
-import TuningSelector from '../ControlPlate/TuningSelector';
-import FretSpacingSelector from '../FretSpacingSelector';
+import TuningSelector from './TuningSelector';
+import FretSpacingSelector from './FretSpacingSelector';
 import './settings.css';
 
 export default function Settings ({ children }) {
