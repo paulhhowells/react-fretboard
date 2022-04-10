@@ -1,7 +1,7 @@
 import {
 	FRETBOARD_LEFT_PAD,
 	FRET_WIDTH,
-} from '../constants';
+} from '../../constants';
 
 export default function Frets ({ frets, fretHeight }) {
 	return (

@@ -33,9 +33,9 @@
 	font-size: 0.5em;
 	font-weight: 700;
 }
-.fretboard__note--flat {
-	/* letter-spacing: -2pt; */
-}
+/* .fretboard__note--flat {
+	// letter-spacing: -2pt;
+} */
 .fretboard__note--passing > text {
 	fill: #333;
 	font-size: 0.4em;

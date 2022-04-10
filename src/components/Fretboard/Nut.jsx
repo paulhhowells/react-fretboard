@@ -4,7 +4,7 @@ import {
 	NUT_X,
 	STRING_TO_EDGE_OF_FRETBOARD,
 	STRING_TO_STRING_VERTICAL_OFFSET,
-} from '../constants';
+} from '../../constants';
 
 export default function Nut ({ fretboardHeight, tuning }) {
 	return (
