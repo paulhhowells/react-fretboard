@@ -1,10 +1,10 @@
-import { useScaleNotes } from '../context/ScaleContext';
+import { useScaleNotes } from '../../context/ScaleContext';
 import NotesOnAString from './NotesOnAString';
 import {
 	FRETBOARD_LEFT_PAD,
 	STRING_TO_STRING_VERTICAL_OFFSET,
 	STRING_TO_EDGE_OF_FRETBOARD,
-} from '../constants';
+} from '../../constants';
 
 export default function Notes ({
 	numberOfFrets,

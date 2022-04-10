@@ -1,4 +1,4 @@
-import { NOTE_LABELLING_OPTIONS } from '../constants';
+import { NOTE_LABELLING_OPTIONS } from '../../constants';
 
 const INTERVAL = NOTE_LABELLING_OPTIONS[1].key; // TODO refactor to be less fragile
 const elementClassName = 'fretboard__note';
