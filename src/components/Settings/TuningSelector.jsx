@@ -1,40 +1,22 @@
 import React from 'react';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-
 import { TUNING } from '../../constants';
+import ToggleButtons from './ToggleButtons';
 
 const tuningOptions = Object.entries(TUNING).map(
-	([ tuningKey, { label } ]) => ({ tuningKey, label })
+	([ tuningKey, { label } ]) => ({ key: tuningKey, label })
 );
 
 function TuningSelector ({ tuningKey, setTuningKey }) {
-	function handleChange (_event, updatedTuningKey) {
-		setTuningKey(updatedTuningKey);
-	}
+	const handleToggle = updatedTuningKey => setTuningKey(updatedTuningKey);
 
 	return (
-		<div className='tuning-selector'>
-			<ToggleButtonGroup
-				value={tuningKey}
-				exclusive
-				onChange={handleChange}
-				aria-label="Tuning"
-				size="small"
-			>
-				{
-					tuningOptions.map(({ tuningKey, label }) => (
-						<ToggleButton
-							key={tuningKey}
-							value={tuningKey}
-							aria-label={label}
-						>
-							{ label}
-						</ToggleButton>
-					))
-				}
-			</ToggleButtonGroup>
-		</div>
+		<ToggleButtons
+			className='fret-spacing-selector'
+			options={tuningOptions}
+			value={tuningKey}
+			handleToggle={handleToggle}
+			ariaLabel="Tuning"
+		/>
 	);
 }
 

@@ -1,8 +1,6 @@
 import React from 'react';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-
 import { FRET_SPACING } from '../../constants';
+import ToggleButtons from './ToggleButtons';
 
 const fretSpacingOptions = [
 	{ key: FRET_SPACING.EVEN, label: 'Even' },
@@ -11,33 +9,16 @@ const fretSpacingOptions = [
 
 function FretSpacingSelector ({ fretSpacing
 	, setFretSpacing }) {
-	function handleChange (_event, updatedFretSpacing
-	) {
-		setFretSpacing(updatedFretSpacing);
-	}
+	const handleToggle = updatedFretSpacing => setFretSpacing(updatedFretSpacing);
 
 	return (
-		<div className='style-mode-selector'>
-			<ToggleButtonGroup
-				value={fretSpacing}
-				exclusive
-				onChange={handleChange}
-				aria-label="Fret Mode"
-				size="small"
-			>
-				{
-					fretSpacingOptions.map(({ key, label }) => (
-						<ToggleButton
-							key={key}
-							value={key}
-							aria-label={label}
-						>
-							{ label}
-						</ToggleButton>
-					))
-				}
-			</ToggleButtonGroup>
-		</div>
+		<ToggleButtons
+			className='fret-spacing-selector'
+			options={fretSpacingOptions}
+			value={fretSpacing}
+			handleToggle={handleToggle}
+			ariaLabel="Fret Spacing"
+		/>
 	);
 }
 
