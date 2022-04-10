@@ -1,6 +1,4 @@
-.settings-open {
-
-}
+/* .settings-open {} */
 .settings-open > button {
 	font-family: 'Helvetica Neue', sans-serif;
 	text-transform: none;
@@ -23,4 +21,10 @@
 }
 .settings-box > button > svg {
 	fill: #777;
+}
+
+.settings-box .MuiToggleButton-standard {
+	text-transform: none;
+	font-family: 'Helvetica Neue', sans-serif;
+	font-weight: 400;
 }
