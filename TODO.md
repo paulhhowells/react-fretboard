@@ -8,7 +8,7 @@
 * [x] add setting > select tuning
 * [x] pale notes at nut
 * [x] fretboard spacing, even || rule of eighteen
-* [ ] use local storage
+* [x] use local storage
 * [ ] summary text
 * [ ] make design responsive, e.g. fretboard width
 * [ ] string muting
