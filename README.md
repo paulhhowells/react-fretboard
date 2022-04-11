@@ -26,7 +26,7 @@ Ensure the tuning matches your guitar, by default it is set to Spanish tuning, i
 #### Blues in A
 * Select `Blues` mode and choose `A` as the root note
 * Select `Dominant 7` to see the 4 notes of an A seventh dominant V chord
-* Select `I`, `IV`, and `V` to see a dominant seventh chords in a blues chord progression.
+* Select `I`, `IV`, and `V` to see dominant seventh chords in a blues chord progression (A7, D7, E7)
 * Select `Major Blues` or `Minor Blues` to see those scales over each of these 3 chords
 
 <hr />
