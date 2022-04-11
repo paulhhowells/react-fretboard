@@ -56,6 +56,19 @@ const PATTERN = {
 			intervalLabels: [ '1', '♭3', '4', '♭5', '5', '♭7' ],
 			passingNotes: [ 6 ],
 		},
+		powerChord: {
+			intervals: [ 0, 7 ],
+			intervalLabels: [ '1', '5' ],
+		},
+		minorTwoChord: {
+			// intervals: [ 0, 3, 7, 10 ],
+			intervals: [ 2, 5, 9, 0 ],
+			intervalLabels: [ '1', '♭3', '5', '♭7' ],
+		},
+		majorSixthChord: {
+			intervals: [ 0, 4, 7, 9 ],
+			intervalLabels: [ '1', '3', '5', '6' ],
+		},
 		// TODO rename to dominant diad
 		diad_3_7: {
 			intervals: [ 4, 10 ],

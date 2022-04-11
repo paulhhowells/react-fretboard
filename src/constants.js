@@ -48,6 +48,11 @@ export const PATTERN_TYPE = Object.freeze({
 	MAJOR_BLUES: 'modal.majorBlues',
 	MINOR_BLUES: 'modal.minorBlues',
 	DIAD_3_7: 'modal.diad_3_7',
+
+	POWER_CHORD: 'modal.powerChord',
+	MINOR_TWO_CHORD: 'modal.minorTwoChord',
+	MAJOR_SIXTH_CHORD: 'modal.majorSixthChord',
+
 	// TODO: how to offer a subset of these options in UI?
 	PENTATONIC_1: 'diatonic.pentatonic',
 	/*
@@ -70,6 +75,10 @@ export const PATTERN = Object.freeze({
 	MAJOR_BLUES: 'MAJOR_BLUES',
 	MINOR_BLUES: 'MINOR_BLUES',
 	DIAD_3_7: 'DIAD_3_7',
+	POWER_CHORD: 'POWER_CHORD',
+	MINOR_TWO_CHORD: 'MINOR_TWO_CHORD',
+	MAJOR_SIXTH_CHORD: 'MAJOR_SIXTH_CHORD',
+
 	// PENTATONIC_1: 'pentatonic',
 });
 
@@ -145,6 +154,11 @@ export const STYLE_MODE_OPTIONS = Object.freeze({
 	BLUES: {
 		patternOptions: [
 			{
+				pattern: PATTERN.POWER_CHORD,
+				patternId: 'POWER_CHORD',
+				label: 'Power chord',
+			},
+			{
 				pattern: PATTERN.TRIAD,
 				patternId: 'TRIAD',
 				label: 'Triad',
@@ -152,7 +166,7 @@ export const STYLE_MODE_OPTIONS = Object.freeze({
 			{
 				pattern: PATTERN.DOMINANT_SEVENTH_CHORD,
 				patternId: 'DOMINANT_SEVENTH_CHORD',
-				label: 'Dominant 7 Chord',
+				label: 'Dominant 7th chord',
 			},
 			{
 				pattern: PATTERN.MIXOLYDIAN,
@@ -170,9 +184,19 @@ export const STYLE_MODE_OPTIONS = Object.freeze({
 				label: 'Minor Blues scale',
 			},
 			{
+				pattern: PATTERN.MAJOR_SIXTH_CHORD,
+				patternId: 'MAJOR_SIXTH_CHORD',
+				label: 'Major Sixth chord',
+			},
+			{
 				pattern: PATTERN.DIAD_3_7,
 				patternId: 'DIAD_3_7',
 				label: 'Diad: 3 & 7',
+			},
+			{
+				pattern: PATTERN.MINOR_TWO_CHORD,
+				patternId: 'MINOR_TWO_CHORD',
+				label: 'IIm substitution',
 			},
 		],
 		degreeOptions: [
