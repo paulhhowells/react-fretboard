@@ -17,6 +17,20 @@ export const usePersistence = ({
 		}
 		initialState.appVersion = currentVersion;
 	},
+	reducer = (state, action) => {
+		const { key, value } = action;
+
+		if (key !== undefined && value !== undefined) {
+			const newState = {
+				...state,
+				[key]: value,
+			};
+
+			return newState;
+		}
+
+		return state;
+	},
 }) => {
 	const persistenceNamespace = APP_NAME
 		+ ((userName) ? '.' + userName : '')
@@ -36,20 +50,7 @@ export const usePersistence = ({
 	const { current: persistedState } = React.useRef(initState());
 
 	const [ currentState, dispatch ] = React.useReducer(
-		function reducer (state, action) {
-			const { key, value } = action;
-
-			if (key !== undefined && value !== undefined) {
-				const newState = {
-					...state,
-					[key]: value,
-				};
-
-				return newState;
-			}
-
-			return state;
-		},
+		reducer,
 		persistedState,
 	);
 
@@ -64,5 +65,5 @@ export const usePersistence = ({
 
 	const persistState = React.useCallback((key, value) => dispatch({ key, value }), []);
 
-	return { persistedState, persistState, currentState };
+	return { persistedState, persistState, currentState, dispatch };
 };
