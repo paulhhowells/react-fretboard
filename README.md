@@ -15,6 +15,20 @@ Ensure the tuning matches your guitar, by default it is set to Spanish tuning, i
 1. Select the root note of the key you wish to play in.
 2. Select the scale or chord notes you want to see on the fretboard.
 
+### Examples
+#### Chords in the key of C major
+* Select `Diatonic` mode and choose `G` as the root note
+* Select `Triad` to see 3 note triad chords
+* Select `Note` to see each of these 3 notes as notes from the `G` major scale, or `Interval` to see each note as an interval that the triad contains
+* For a chord progression such as `G`, `D`, `Em`, `C` choose the degrees: `I`, `V`, `VI`, and `IV`
+* Notice that instead of the triads you can choose to see a `Pentatonic` scale for each of these degrees
+
+#### Blues
+* Select `Blues` mode and choose `A` as the root note
+* Select `Dominant 7` to see the 4 notes of an A seventh dominant V chord
+* Select `I`, `IV`, and `V` to see a dominant seventh chords in a blues chord progression.
+* Select `Major Blues` or `Minor Blues` to see those scales over each of these 3 chords
+
 <hr />
 
 ## Development
