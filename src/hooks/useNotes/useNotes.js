@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { usePersistence } from '../usePersistence';
 import {
 	KEY,
 	PATTERN,
@@ -15,12 +16,10 @@ const ACTION_TYPE = Object.freeze({
 	SET_STYLE_MODE: 'SET_STYLE_MODE',
 });
 
-// TODO: save state in local storage
 const defaultStyleMode = STYLE_MODE.DIATONIC;
 const initialNoteState = {
 	keyRoot: KEY.C,
 	degree: 0,
-	notes: new Map([]),
 	// pattern: STYLE_MODE_OPTIONS[defaultStyleMode].patternOptions[3].pattern,
 	pattern: PATTERN.TRIAD,
 	styleMode: defaultStyleMode,
@@ -76,14 +75,21 @@ function noteReducer (state, action) {
 }
 
 export function useNotes () {
-	const [ state, dispatch ] = React.useReducer(noteReducer, initialNoteState);
+	const {
+		currentState,
+		dispatch,
+	} = usePersistence({
+		id: 'notes',
+		defaultState: initialNoteState,
+		reducer: noteReducer,
+	});
 
 	const {
 		keyRoot,
 		degree,
 		pattern,
 		styleMode,
-	} = state;
+	} = currentState;
 
 	const { notes } = React.useMemo(() => deriveNotes({
 		keyRoot,
@@ -105,26 +111,26 @@ export function useNotes () {
 		degree => dispatch({
 			type: ACTION_TYPE.SET_DEGREE,
 			payload: { degree },
-		}), []);
+		}), [ dispatch ]);
 
 	const setPattern = React.useCallback(
 		pattern => dispatch({
 			type: ACTION_TYPE.SET_PATTERN,
 			payload: { pattern },
-		}), []);
+		}), [ dispatch ]);
 
 	const setStyleMode = React.useCallback(
 		styleMode => dispatch({
 			type: ACTION_TYPE.SET_STYLE_MODE,
 			payload: { styleMode },
-		}), []);
+		}), [ dispatch ]);
 
 	// TODO: rename as setKey ?
 	const setKeyRoot = React.useCallback(
 		keyRoot => dispatch({
 			type: ACTION_TYPE.SET_KEY_ROOT,
 			payload: { keyRoot },
-		}), []);
+		}), [ dispatch ]);
 
 	return {
 		degree,
