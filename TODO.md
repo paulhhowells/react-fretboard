@@ -26,8 +26,10 @@
 * sound: play root notes? midi?
 * sync changes to an audio file?
 * [x] roll fretboard edges (reduce edge to string distance)
+* Jazz ?
 
 ## Fix
+* [ ] D Major Blues I has Gb - is it because of passing note?
 * [x] mixolydian flat notes - improve use of flats & sharps
 * [x] diatonic degrees
 * [x] fix font size in note
