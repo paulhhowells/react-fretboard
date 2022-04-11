@@ -40,23 +40,21 @@ export default function ControlPlate ({ children }) {
 					keyRoot={keyRoot}
 					setKeyRoot={setKeyRoot}
 				/>
-			</div>
-			<div className="row">
-				<PatternSelector
-					patternOptions={patternOptions}
-					pattern={pattern}
-					setPattern={setPattern}
-				/>
 				<DegreeSelector
 					degreeOptions={degreeOptions}
 					degree={degree}
 					setDegree={setDegree}
 				/>
 			</div>
-			<div className='row'>
+			<div className="row">
 				<NoteLabellingSelector
 					noteLabelling={noteLabelling}
 					setNoteLabelling={setNoteLabelling}
+				/>
+				<PatternSelector
+					patternOptions={patternOptions}
+					pattern={pattern}
+					setPattern={setPattern}
 				/>
 			</div>
 		</div>
