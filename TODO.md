@@ -13,6 +13,8 @@
 * [ ] make design responsive, e.g. fretboard width
 * [ ] string muting
 * [ ] connector layer, interval lines, e.g. for parallel 6ths
+* Blues mode: find a good way to show IIm chords
+* Blues mode: find a good way to show the other pentatonics that work over each degree, and avoid those that don’t
 * string nut position for banjo - specify fret in tuning
 * add Dorian mode
 * piano roll - set changes through time
