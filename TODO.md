@@ -31,7 +31,8 @@
 ## Fix
 * [ ] missing pattern bug
 * [ ] IIm substitution has incorrect root
-* [ ] D Major Blues I has Gb - is it because of passing note? - better derive notes using diatonic reference
+* [x] D Major Blues I has Gb - is it because of passing note? - better derive notes using diatonic reference
+* [x] centre passing notes over nut
 * [x] mixolydian flat notes - improve use of flats & sharps
 * [x] diatonic degrees
 * [x] fix font size in note

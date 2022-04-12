@@ -36,7 +36,13 @@
 /* .fretboard__note--flat {
 	// letter-spacing: -2pt;
 } */
+
+.fretboard__note--passing > circle {
+	/* TODO: replace with relative units */
+	transform: translate(-3px, 0);
+}
 .fretboard__note--passing > text {
+	transform: translate(-3px, 0);
 	fill: #333;
 	font-size: 0.4em;
 	font-weight: 500;
