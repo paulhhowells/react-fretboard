@@ -29,7 +29,7 @@
 * Jazz ?
 
 ## Fix
-* [ ] missing pattern bug
+* [?] missing pattern bug
 * [ ] IIm substitution has incorrect root
 * [x] D Major Blues I has Gb - is it because of passing note? - better derive notes using diatonic reference
 * [x] centre passing notes over nut
