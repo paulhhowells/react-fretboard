@@ -61,9 +61,12 @@ const PATTERN = {
 			intervalLabels: [ '1', '5' ],
 		},
 		minorTwoChord: {
-			// intervals: [ 0, 3, 7, 10 ],
-			intervals: [ 2, 5, 9, 0 ],
+			intervals: [ 0, 3, 7, 10 ],
 			intervalLabels: [ '1', '♭3', '5', '♭7' ],
+			// semitones above key root, i.e. a fifth above, to substitute a II over a V
+			// e.g. when root is set to G, substitute a Dm7 for G7, as if key was C major
+			// (i.e. not the II as if the key root was the I).
+			substitution: 7,
 		},
 		majorSixthChord: {
 			intervals: [ 0, 4, 7, 9 ],
@@ -266,12 +269,14 @@ function notesFromPattern ({
 		return notes;
 	} else if (patternType === 'modal') {
 		// N.B. degreeIndex does NOT provide the mode.
-		const modalRoot = (rootNote + diatonic[degreeIndex]) % 12;
+
 		const {
 			intervals: modalPattern,
 			intervalLabels,
 			passingNotes = null,
+			substitution = 0,
 		} = patternNotes;
+		const modalRoot = (rootNote + diatonic[degreeIndex] + substitution) % 12;
 
 		const notes = modalPattern
 			.map((modalNote, index) => ([
