@@ -37,12 +37,12 @@ export const degreeLabels = Object.values(DEGREE_LABEL);
 // TODO: refactor this to avoid doing 'clever' things with regex,
 // just store the data in an object.
 export const PATTERN_TYPE = Object.freeze({
-	// diatonic
+	// Diatonic
 	DIATONIC: 'scale.diatonic',
 	TRIAD: 'diatonic.triad',
 	SEVENTH_CHORD: 'diatonic.seventhChord',
 	PENTATONIC: 'diatonic.pentatonic',
-	// blues
+	// Blues
 	DOMINANT_SEVENTH_CHORD: 'modal.dominantSeventhChord',
 	MIXOLYDIAN: 'modal.mixolydian',
 	MAJOR_BLUES: 'modal.majorBlues',
