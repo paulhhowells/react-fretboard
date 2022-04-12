@@ -4,10 +4,10 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 export default function PatternSelector ({
 	patternOptions,
-	pattern: patternId,
-	setPattern,
+	patternId,
+	setPatternId,
 }) {
-	const handlePattern = (_event, patternId) => setPattern(patternId);
+	const handlePattern = (_event, patternId) => setPatternId(patternId);
 
 	return (
 		<div className="pattern-selector">

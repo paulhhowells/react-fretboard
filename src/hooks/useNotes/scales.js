@@ -78,7 +78,6 @@ const PATTERN = {
 	},
 };
 
-
 const ENHARMONIC_LABEL = {
 	sharp: [ 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B' ],
 	flat: [ 'C', 'D♭', 'D', 'E♭', 'E', 'F', 'G♭', 'G', 'A♭', 'A', 'B♭', 'B' ],
@@ -129,9 +128,13 @@ const BLUES_INTERVAL = [
 
 export const deriveNotes = ({
 	keyRoot,
-	pattern: patternId,
+	patternId = null,
 	degreeIndex = 0, // Degree of diatonic scale that mode is built upon.
 }) => {
+	if (patternId === null) {
+		throw new Error('Missing patternId: ' + patternId);
+	}
+
 	// A number 0 to 11
 	const rootNote = KEY_DEFINITION[keyRoot].note;
 
@@ -140,11 +143,10 @@ export const deriveNotes = ({
 		: KEY_SIGN.SHARP;
 
 	const twelveNoteDescription = ENHARMONIC_LABEL[keySign];
-
 	const pattern = PATTERN_TYPE[patternId];
 
 	if (!pattern) {
-		throw new Error('Missing patternId: ' + patternId + ' ' + JSON.stringify(PATTERN_TYPE));
+		throw new Error('Missing pattern: ' + patternId + ' ' + JSON.stringify(PATTERN_TYPE));
 	}
 
 	const patternMatch = pattern.match(patternRegex);
@@ -278,7 +280,7 @@ function notesFromPattern ({
 				intervalLabels[index],
 			]))
 			.map(([ intervalSemitone, note, intervalLabel ]) => {
-				const noteLabel = getModalNoteLabel(note, intervalLabel);
+				const noteLabel = getModalNoteLabel(note, intervalLabel, twelveNoteDescription, diatonic, intervalSemitone);
 
 				return {
 					note,

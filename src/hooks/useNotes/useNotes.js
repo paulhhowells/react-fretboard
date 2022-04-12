@@ -3,7 +3,7 @@ import React from 'react';
 import { usePersistence } from '../usePersistence';
 import {
 	KEY,
-	PATTERN,
+	PATTERN_ID,
 	STYLE_MODE_OPTIONS,
 } from '../../constants';
 import { STYLE_MODE } from './constants';
@@ -21,7 +21,7 @@ const initialNoteState = {
 	keyRoot: KEY.C,
 	degree: 0,
 	// pattern: STYLE_MODE_OPTIONS[defaultStyleMode].patternOptions[3].pattern,
-	pattern: PATTERN.TRIAD,
+	patternId: PATTERN_ID.TRIAD,
 	styleMode: defaultStyleMode,
 };
 
@@ -42,7 +42,7 @@ function noteReducer (state, action) {
 		case ACTION_TYPE.SET_PATTERN:
 			return {
 				...state,
-				pattern: action.payload.pattern,
+				patternId: action.payload.patternId,
 			};
 		case ACTION_TYPE.SET_DEGREE:
 			return {
@@ -51,17 +51,17 @@ function noteReducer (state, action) {
 			};
 		case ACTION_TYPE.SET_STYLE_MODE:
 			const { styleMode } = action.payload;
-			const { degree, pattern } = state;
-			const { patternOptions, degreeOptions } = STYLE_MODE_OPTIONS[styleMode];
+			const { degree, patternId } = state;
 			const newState = {
 				...state,
 				styleMode,
 			};
+			const { patternOptions, degreeOptions } = STYLE_MODE_OPTIONS[styleMode];
 
 			// Update pattern & degree if current values are not valid options for styleMode.
 			// TODO use .some instead of .find ?
-			if (patternOptions.find(patternOption => patternOption.pattern === pattern) === undefined) {
-				newState.pattern = patternOptions[0].pattern;
+			if (patternOptions.find(patternOption => patternOption.patternId === patternId) === undefined) {
+				newState.patternId = patternOptions[0].patternId;
 			}
 
 			if (degreeOptions.find(degreeOption => degreeOption.degree === degree) === undefined) {
@@ -87,15 +87,15 @@ export function useNotes () {
 	const {
 		keyRoot,
 		degree,
-		pattern,
+		patternId,
 		styleMode,
 	} = currentState;
 
 	const { notes } = React.useMemo(() => deriveNotes({
 		keyRoot,
-		pattern,
+		patternId,
 		degreeIndex: degree,
-	}), [ keyRoot, pattern, degree ]);
+	}), [ keyRoot, patternId, degree ]);
 
 	const patternOptions = STYLE_MODE_OPTIONS[styleMode].patternOptions;
 	const degreeOptions = React.useMemo(
@@ -113,10 +113,10 @@ export function useNotes () {
 			payload: { degree },
 		}), [ dispatch ]);
 
-	const setPattern = React.useCallback(
-		pattern => dispatch({
+	const setPatternId = React.useCallback(
+		patternId => dispatch({
 			type: ACTION_TYPE.SET_PATTERN,
-			payload: { pattern },
+			payload: { patternId },
 		}), [ dispatch ]);
 
 	const setStyleMode = React.useCallback(
@@ -137,11 +137,11 @@ export function useNotes () {
 		degreeOptions,
 		keyRoot,
 		notes,
-		pattern,
+		patternId,
 		patternOptions,
 		setDegree,
 		setKeyRoot,
-		setPattern,
+		setPatternId,
 		setStyleMode,
 		styleMode,
 	};

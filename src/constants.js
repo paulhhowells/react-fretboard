@@ -65,7 +65,7 @@ export const PATTERN_TYPE = Object.freeze({
 });
 
 // Enum.
-export const PATTERN = Object.freeze({
+export const PATTERN_ID = Object.freeze({
 	DIATONIC: 'DIATONIC',
 	TRIAD: 'TRIAD',
 	SEVENTH_CHORD: 'SEVENTH_CHORD',
@@ -86,23 +86,19 @@ export const STYLE_MODE_OPTIONS = Object.freeze({
 	DIATONIC: {
 		patternOptions: [
 			{
-				pattern: PATTERN.DIATONIC,
-				patternId: 'DIATONIC',
+				patternId: PATTERN_ID.DIATONIC,
 				label: 'Diatonic scale',
 			},
 			{
-				pattern: PATTERN.TRIAD,
-				patternId: 'TRIAD',
+				patternId: PATTERN_ID.TRIAD,
 				label: 'Triad',
 			},
 			{
-				pattern: PATTERN.SEVENTH_CHORD,
-				patternId: 'SEVENTH_CHORD',
+				patternId: PATTERN_ID.SEVENTH_CHORD,
 				label: 'Seventh Chord',
 			},
 			{
-				pattern: PATTERN.PENTATONIC,
-				patternId: 'PENTATONIC',
+				patternId: PATTERN_ID.PENTATONIC,
 				label: 'Pentatonic scale',
 			},
 		],
@@ -154,48 +150,39 @@ export const STYLE_MODE_OPTIONS = Object.freeze({
 	BLUES: {
 		patternOptions: [
 			{
-				pattern: PATTERN.POWER_CHORD,
-				patternId: 'POWER_CHORD',
+				patternId: PATTERN_ID.POWER_CHORD,
 				label: 'Power chord',
 			},
 			{
-				pattern: PATTERN.TRIAD,
-				patternId: 'TRIAD',
+				patternId: PATTERN_ID.TRIAD,
 				label: 'Triad',
 			},
 			{
-				pattern: PATTERN.DOMINANT_SEVENTH_CHORD,
-				patternId: 'DOMINANT_SEVENTH_CHORD',
+				patternId: PATTERN_ID.DOMINANT_SEVENTH_CHORD,
 				label: 'Dominant 7th chord',
 			},
 			{
-				pattern: PATTERN.MIXOLYDIAN,
-				patternId: 'MIXOLYDIAN',
+				patternId: PATTERN_ID.MIXOLYDIAN,
 				label: 'Mixolydian scale',
 			},
 			{
-				pattern: PATTERN.MAJOR_BLUES,
-				patternId: 'MAJOR_BLUES',
+				patternId: PATTERN_ID.MAJOR_BLUES,
 				label: 'Major Blues scale',
 			},
 			{
-				pattern: PATTERN.MINOR_BLUES,
-				patternId: 'MINOR_BLUES',
+				patternId: PATTERN_ID.MINOR_BLUES,
 				label: 'Minor Blues scale',
 			},
 			{
-				pattern: PATTERN.MAJOR_SIXTH_CHORD,
-				patternId: 'MAJOR_SIXTH_CHORD',
+				patternId: PATTERN_ID.MAJOR_SIXTH_CHORD,
 				label: 'Major Sixth chord',
 			},
 			{
-				pattern: PATTERN.DIAD_3_7,
-				patternId: 'DIAD_3_7',
+				patternId: PATTERN_ID.DIAD_3_7,
 				label: 'Diad: 3 & 7',
 			},
 			{
-				pattern: PATTERN.MINOR_TWO_CHORD,
-				patternId: 'MINOR_TWO_CHORD',
+				patternId: PATTERN_ID.MINOR_TWO_CHORD,
 				label: 'IIm substitution',
 			},
 		],

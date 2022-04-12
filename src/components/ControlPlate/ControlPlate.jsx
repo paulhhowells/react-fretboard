@@ -13,11 +13,11 @@ export default function ControlPlate ({ children }) {
 		degree,
 		degreeOptions,
 		keyRoot,
-		pattern,
+		patternId,
 		patternOptions,
 		setDegree,
 		setKeyRoot,
-		setPattern,
+		setPatternId,
 		setStyleMode,
 		styleMode,
 	} = useScaleOptions();
@@ -53,8 +53,8 @@ export default function ControlPlate ({ children }) {
 				/>
 				<PatternSelector
 					patternOptions={patternOptions}
-					pattern={pattern}
-					setPattern={setPattern}
+					patternId={patternId}
+					setPatternId={setPatternId}
 				/>
 			</div>
 		</div>
