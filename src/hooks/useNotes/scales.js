@@ -142,12 +142,17 @@ export const deriveNotes = ({
 	const twelveNoteDescription = ENHARMONIC_LABEL[keySign];
 
 	const pattern = PATTERN_TYPE[patternId];
+
+	if (!pattern) {
+		throw new Error('Missing patternId: ' + patternId + ' ' + JSON.stringify(PATTERN_TYPE));
+	}
+
 	const patternMatch = pattern.match(patternRegex);
 	const patternType = patternMatch[1];
 	const patternNotes = PATTERN[patternType][patternMatch[3]];
 
 	if (!patternNotes) {
-		throw new Error('Missing pattern: ' + pattern);
+		throw new Error('Missing pattern notes: ' + pattern + ' : ' + patternType + ' : ' + JSON.stringify(patternMatch));
 	}
 
 	const notes = notesFromPattern({

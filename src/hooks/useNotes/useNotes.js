@@ -70,7 +70,7 @@ function noteReducer (state, action) {
 
 			return newState;
 		default:
-			throw new Error(action);
+			throw new Error('noteReducer action type not found: ' + JSON.stringify(action));
 	}
 }
 
