@@ -38,7 +38,7 @@ export const usePersistence = ({
 
 	const initState = () => {
 		const state = localStorage.getItem(persistenceNamespace);
-		const initialState = (state !== null && state !== undefined)
+		const initialState = (state !== undefined && state !== null)
 			? JSON.parse(state)
 			: {};
 
