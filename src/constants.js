@@ -34,11 +34,29 @@ const DEGREE_LABEL = Object.freeze({
 
 export const degreeLabels = Object.values(DEGREE_LABEL);
 
+// Enum.
+export const PATTERN_ID = Object.freeze({
+	DIATONIC_SCALE: 'DIATONIC_SCALE',
+	TRIAD: 'TRIAD',
+	SEVENTH_CHORD: 'SEVENTH_CHORD',
+	PENTATONIC: 'PENTATONIC',
+	DOMINANT_SEVENTH_CHORD: 'DOMINANT_SEVENTH_CHORD',
+	MIXOLYDIAN: 'MIXOLYDIAN',
+	MAJOR_BLUES: 'MAJOR_BLUES',
+	MINOR_BLUES: 'MINOR_BLUES',
+	DIAD_3_7: 'DIAD_3_7',
+	POWER_CHORD: 'POWER_CHORD',
+	MINOR_TWO_CHORD: 'MINOR_TWO_CHORD',
+	MAJOR_SIXTH_CHORD: 'MAJOR_SIXTH_CHORD',
+
+	// PENTATONIC_1: 'pentatonic',
+});
+
 // TODO: refactor this to avoid doing 'clever' things with regex,
 // just store the data in an object.
 export const PATTERN_TYPE = Object.freeze({
 	// Diatonic
-	DIATONIC: 'scale.diatonic',
+	DIATONIC_SCALE: 'scale.diatonic',
 	TRIAD: 'diatonic.triad',
 	SEVENTH_CHORD: 'diatonic.seventhChord',
 	PENTATONIC: 'diatonic.pentatonic',
@@ -64,29 +82,12 @@ export const PATTERN_TYPE = Object.freeze({
 	// PENTATONIC_5: 'diatonic.pentatonic.5',
 });
 
-// Enum.
-export const PATTERN_ID = Object.freeze({
-	DIATONIC: 'DIATONIC',
-	TRIAD: 'TRIAD',
-	SEVENTH_CHORD: 'SEVENTH_CHORD',
-	PENTATONIC: 'PENTATONIC',
-	DOMINANT_SEVENTH_CHORD: 'DOMINANT_SEVENTH_CHORD',
-	MIXOLYDIAN: 'MIXOLYDIAN',
-	MAJOR_BLUES: 'MAJOR_BLUES',
-	MINOR_BLUES: 'MINOR_BLUES',
-	DIAD_3_7: 'DIAD_3_7',
-	POWER_CHORD: 'POWER_CHORD',
-	MINOR_TWO_CHORD: 'MINOR_TWO_CHORD',
-	MAJOR_SIXTH_CHORD: 'MAJOR_SIXTH_CHORD',
-
-	// PENTATONIC_1: 'pentatonic',
-});
 
 export const STYLE_MODE_OPTIONS = Object.freeze({
-	DIATONIC: {
+	DIATONIC_MODE: {
 		patternOptions: [
 			{
-				patternId: PATTERN_ID.DIATONIC,
+				patternId: PATTERN_ID.DIATONIC_SCALE,
 				label: 'Diatonic scale',
 			},
 			{
@@ -147,7 +148,7 @@ export const STYLE_MODE_OPTIONS = Object.freeze({
 			 },
 		],
 	},
-	BLUES: {
+	BLUES_MODE: {
 		patternOptions: [
 			{
 				patternId: PATTERN_ID.POWER_CHORD,

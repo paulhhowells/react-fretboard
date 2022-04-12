@@ -16,7 +16,7 @@ const ACTION_TYPE = Object.freeze({
 	SET_STYLE_MODE: 'SET_STYLE_MODE',
 });
 
-const defaultStyleMode = STYLE_MODE.DIATONIC;
+const defaultStyleMode = STYLE_MODE.DIATONIC_MODE;
 const initialNoteState = {
 	keyRoot: KEY.C,
 	degree: 0,
@@ -74,6 +74,30 @@ function noteReducer (state, action) {
 	}
 }
 
+function upgradeState (initialState, defaultState, currentAppVersion) {
+	for (const key in defaultState) {
+		if ((key in initialState) === false) {
+			initialState[key] = defaultState[key];
+		}
+	}
+
+	if (initialState.appVersion !== currentAppVersion) {
+		if (initialState.styleMode === 'BLUES') {
+			initialState.styleMode = 'BLUES_MODE';
+		}
+
+		if (initialState.styleMode === 'DIATONIC') {
+			initialState.styleMode = 'DIATONIC_MODE';
+		}
+
+		if (initialState.patternId === 'DIATONIC') {
+			initialState.patternId = 'DIATONIC_SCALE';
+		}
+	}
+
+	initialState.appVersion = currentAppVersion;
+};
+
 export function useNotes () {
 	const {
 		currentState,
@@ -82,6 +106,7 @@ export function useNotes () {
 		id: 'notes',
 		defaultState: initialNoteState,
 		reducer: noteReducer,
+		upgradeState,
 	});
 
 	const {
