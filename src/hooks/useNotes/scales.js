@@ -38,31 +38,31 @@ const PATTERN = {
 	modal: {
 		dominantSeventhChord: {
 			intervals: [ 0, 4, 7, 10 ],
-			intervalLabels: [ '1', '3', '5', '♭7' ],
+			intervalLabels: [ 'R', '3', '5', '♭7' ],
 			// mode: 7,
 		},
 		mixolydian: {
 			intervals: [ 0, 2, 4, 5, 7, 9, 10 ],
-			intervalLabels: [ '1', '2', '3', '4', '5', '6', '♭7' ],
+			intervalLabels: [ 'R', '2', '3', '4', '5', '6', '♭7' ],
 			// mode: 7,
 		},
 		majorBlues: {
 			intervals: [ 0, 2, 3, 4, 7, 9 ],
-			intervalLabels: [ '1', '2', '♭3', '3', '5', '6' ],
+			intervalLabels: [ 'R', '2', '♭3', '3', '5', '6' ],
 			passingNotes: [ 3 ],
 		},
 		minorBlues: {
 			intervals: [ 0, 3, 5, 6, 7, 10 ],
-			intervalLabels: [ '1', '♭3', '4', '♭5', '5', '♭7' ],
+			intervalLabels: [ 'R', '♭3', '4', '♭5', '5', '♭7' ],
 			passingNotes: [ 6 ],
 		},
 		powerChord: {
 			intervals: [ 0, 7 ],
-			intervalLabels: [ '1', '5' ],
+			intervalLabels: [ 'R', '5' ],
 		},
 		minorTwoChord: {
 			intervals: [ 0, 3, 7, 10 ],
-			intervalLabels: [ '1', '♭3', '5', '♭7' ],
+			intervalLabels: [ 'R', '♭3', '5', '♭7' ],
 			// semitones above key root, i.e. a fifth above, to substitute a II over a V
 			// e.g. when root is set to G, substitute a Dm7 for G7, as if key was C major
 			// (i.e. not the II as if the key root was the I).
@@ -70,7 +70,7 @@ const PATTERN = {
 		},
 		majorSixthChord: {
 			intervals: [ 0, 4, 7, 9 ],
-			intervalLabels: [ '1', '3', '5', '6' ],
+			intervalLabels: [ 'R', '3', '5', '6' ],
 		},
 		// TODO rename to dominant diad
 		diad_3_7: {
@@ -92,7 +92,7 @@ const patternRegex = /(\w+)(\.)(.*)/i;
 
 // degree of scale is 0 to 7
 function getIntervalString (degreeIndex, semitones) {
-	const degree = String(degreeIndex + 1);
+	const degree = (degreeIndex) ? String(degreeIndex + 1) : 'R';
 
 	if (semitones === 0 || degreeIndex === 0) {
 		return degree;
