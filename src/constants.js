@@ -238,7 +238,8 @@ const Db = 1;
 const D = 2;
 const Eb = 3;
 const E = 4;
-// const F = 5; // unused
+// eslint-disable-next-line no-unused-vars
+// const F = 5;
 const Gb = 6;
 const G = 7;
 const Ab = 8;
