@@ -60,14 +60,14 @@ export const PATTERN_TYPE = Object.freeze({
 	TRIAD: 'diatonic.triad',
 	SEVENTH_CHORD: 'diatonic.seventhChord',
 	PENTATONIC: 'diatonic.pentatonic',
+	POWER_CHORD: 'diatonic.powerChord',
+
 	// Blues
 	DOMINANT_SEVENTH_CHORD: 'modal.dominantSeventhChord',
 	MIXOLYDIAN: 'modal.mixolydian',
 	MAJOR_BLUES: 'modal.majorBlues',
 	MINOR_BLUES: 'modal.minorBlues',
 	DIAD_3_7: 'modal.diad_3_7',
-
-	POWER_CHORD: 'modal.powerChord',
 	MINOR_TWO_CHORD: 'modal.minorTwoChord',
 	MAJOR_SIXTH_CHORD: 'modal.majorSixthChord',
 
@@ -101,6 +101,10 @@ export const STYLE_MODE_OPTIONS = Object.freeze({
 			{
 				patternId: PATTERN_ID.PENTATONIC,
 				label: 'Pentatonic scale',
+			},
+			{
+				patternId: PATTERN_ID.POWER_CHORD,
+				label: 'Power chord',
 			},
 		],
 		degreeOptions: [

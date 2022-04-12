@@ -33,6 +33,7 @@ const PATTERN = {
 			'5': [ 0, 2, 3, 4, 6 ],	// vi-
 			'6': [ 0, 2, 4, 5, 6 ],	// VII /º ?
 		},
+		powerChord: [ 0, 4 ],
 	},
 	// Modal: interval number matches one of 12 notes.
 	modal: {
@@ -56,10 +57,10 @@ const PATTERN = {
 			intervalLabels: [ 'R', '♭3', '4', '♭5', '5', '♭7' ],
 			passingNotes: [ 6 ],
 		},
-		powerChord: {
-			intervals: [ 0, 7 ],
-			intervalLabels: [ 'R', '5' ],
-		},
+		// powerChord: {
+		// 	intervals: [ 0, 7 ],
+		// 	intervalLabels: [ 'R', '5' ],
+		// },
 		minorTwoChord: {
 			intervals: [ 0, 3, 7, 10 ],
 			intervalLabels: [ 'R', '♭3', '5', '♭7' ],
