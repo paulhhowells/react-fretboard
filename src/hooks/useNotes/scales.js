@@ -181,7 +181,7 @@ export const deriveNotes = ({
 };
 
 function getModalNoteLabel (note, modeInterval, twelveNoteDescription, diatonic, intervalSemitone) {
-	// TODO: cater for double flats?
+	// TODO: cater for double flats and double sharps?
 
 	// Check if note is in diatonic, if it is then use the diatonic note label as it will match its key signature.
 	// TODO: should this also check if the scale is major?
@@ -207,7 +207,7 @@ function notesFromPattern ({
 	rootNote,
 	twelveNoteDescription
 }) {
-	const diatonic = PATTERN.scale.diatonic; // [ 0, 2, 4, 5, 7, 9, 11
+	const diatonic = PATTERN.scale.diatonic; // [ 0, 2, 4, 5, 7, 9, 11 ]
 
 	if (patternType === 'diatonic') {
 		// N.B. degreeIndex provides the mode of the diatonic.
