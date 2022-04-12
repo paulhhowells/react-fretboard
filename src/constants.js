@@ -318,7 +318,7 @@ export const KEY_DEFINITION = {
 	D_SHARP: { label: 'D♯', note: 3, sharp: true },
 	E_FLAT: { label: 'E♭', note: 3, flat: true },
 	E: { label: 'E', note: 4 },
-	F: { label: 'F', note: 5 },
+	F: { label: 'F', note: 5, flat: true },
 	F_SHARP: { label: 'F♯', note: 6, sharp: true },
 	G_FLAT: { label: 'G♭', note: 6, flat: true },
 	G: { label: 'G', note: 7 },
