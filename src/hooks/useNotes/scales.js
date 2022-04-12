@@ -178,9 +178,16 @@ export const deriveNotes = ({
 	};
 };
 
-function getModalNoteLabel (note, modeInterval) {
+function getModalNoteLabel (note, modeInterval, twelveNoteDescription, diatonic, intervalSemitone) {
 	// TODO: cater for double flats?
 
+	// Check if note is in diatonic, if it is then use the diatonic note label as it will match its key signature.
+	// TODO: should this also check if the scale is major?
+	if (diatonic.includes(intervalSemitone)) {
+		return twelveNoteDescription[note];
+	}
+
+	// If the note does not match a note in the diatonic scale then derive the label from its interval.
 	// This logic does not explictly cater for naturals or double flats,
 	// however a natural note assigned to flat will still find its natural note
 	// within ENHARMONIC_LABEL.
