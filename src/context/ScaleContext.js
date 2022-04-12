@@ -7,30 +7,8 @@ const ScaleOptionsContext = React.createContext();
 function NoteProvider ({ children }) {
 	const {
 		notes,
-		degreeOptions,
-		patternOptions,
-		degree,
-		setDegree,
-		patternId,
-		setPatternId,
-		styleMode,
-		setStyleMode,
-		keyRoot,
-		setKeyRoot,
+		...scaleOptionsValue
 	} = useNotes();
-
-	const scaleOptionsValue = {
-		degreeOptions,
-		patternOptions,
-		degree,
-		setDegree,
-		patternId,
-		setPatternId,
-		styleMode,
-		setStyleMode,
-		keyRoot,
-		setKeyRoot
-	};
 
 	return (
 		<ScaleNoteContext.Provider value={ notes }>
