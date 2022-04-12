@@ -1,6 +1,6 @@
 import React from 'react';
 import { TUNING } from '../../constants';
-import ToggleButtons from './ToggleButtons';
+import ToggleButtons from '../ToggleButtons';
 
 const tuningOptions = Object.entries(TUNING).map(
 	([ tuningKey, { label } ]) => ({ key: tuningKey, label })

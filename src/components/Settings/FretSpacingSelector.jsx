@@ -1,6 +1,6 @@
 import React from 'react';
 import { FRET_SPACING } from '../../constants';
-import ToggleButtons from './ToggleButtons';
+import ToggleButtons from '../ToggleButtons';
 
 const fretSpacingOptions = [
 	{ key: FRET_SPACING.EVEN, label: 'Even' },
