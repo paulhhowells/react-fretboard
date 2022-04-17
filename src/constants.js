@@ -265,15 +265,20 @@ export const TUNING = Object.freeze({
 		noteLabels: [ 'E♭', 'A♭', 'D♭', 'G♭', 'B♭', 'E♭' ].reverse(),
 		notes: [ Eb, Ab, Db, Gb, Bb, Eb ].reverse()
 	},
-	DADGAD: {
-		label: 'DADGAD',
-		noteLabels: [ 'D', 'A', 'D', 'G', 'A', 'D' ].reverse(),
-		notes: [ D, A, D, G, A, D ].reverse()
+	DADGBE: {
+		label: 'Drop D',
+		noteLabels: [ 'D', 'A', 'D', 'G', 'B', 'E' ].reverse(),
+		notes: [ D, A, D, G, B, E ].reverse()
 	},
 	DADGBD: {
 		label: 'Double Drop D',
 		noteLabels: [ 'D', 'A', 'D', 'G', 'B', 'D' ].reverse(),
 		notes: [ D, A, D, G, B, D ].reverse()
+	},
+	DADGAD: {
+		label: 'DADGAD',
+		noteLabels: [ 'D', 'A', 'D', 'G', 'A', 'D' ].reverse(),
+		notes: [ D, A, D, G, A, D ].reverse()
 	},
 	CEGACE: {
 		label: 'C6',
