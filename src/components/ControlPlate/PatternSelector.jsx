@@ -7,7 +7,11 @@ export default function PatternSelector ({
 	patternId,
 	setPatternId,
 }) {
-	const handlePattern = (_event, patternId) => setPatternId(patternId);
+	const handlePattern = (_event, patternId) => {
+		if (patternId !== null) {
+			setPatternId(patternId);
+		}
+	};
 
 	return (
 		<div className="pattern-selector">

@@ -11,7 +11,9 @@ const styleModeOptions = [
 
 function StyleModeSelector ({ styleMode, setStyleMode }) {
 	function handleChange (_event, value) {
-		setStyleMode(value);
+		if (value !== null) {
+			setStyleMode(value);
+		}
 	}
 
 	return (

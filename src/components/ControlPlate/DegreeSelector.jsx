@@ -4,7 +4,9 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 export default function DegreeSelector ({ degree, setDegree, degreeOptions }) {
 	const handleDegree = (_event, degree) => {
-		setDegree(degree);
+		if (degree !== null) {
+			setDegree(degree);
+		}
 	};
 
 	return (

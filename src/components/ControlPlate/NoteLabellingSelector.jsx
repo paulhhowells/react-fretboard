@@ -6,7 +6,9 @@ import { NOTE_LABELLING_OPTIONS } from '../../constants';
 
 function NoteLabellingSelector ({ noteLabelling, setNoteLabelling }) {
 	function handleChange (_event, key) {
-		setNoteLabelling(key);
+		if (key !== null) {
+			setNoteLabelling(key);
+		}
 	}
 
 	return (

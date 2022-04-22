@@ -9,8 +9,7 @@ function ToggleButtons ({
 	handleToggle,
 	ariaLabel,
 }) {
-	const handleChange = (_event, updatedValue
-	) => handleToggle(updatedValue);
+	const handleChange = (_event, updatedValue) => (updatedValue !== null) &&	handleToggle(updatedValue);
 
 	return (
 		<div className={className}>
