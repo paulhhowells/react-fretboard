@@ -12,7 +12,7 @@ export default function Notes ({
 	tuning,
 	noteLabelling,
 }) {
-	const notes = useScaleNotes();
+	const { notes } = useScaleNotes();
 
 	return (
 		<g

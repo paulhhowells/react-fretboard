@@ -7,11 +7,12 @@ const ScaleOptionsContext = React.createContext();
 function NoteProvider ({ children }) {
 	const {
 		notes,
+		rootNote,
 		...scaleOptionsValue
 	} = useNotes();
 
 	return (
-		<ScaleNoteContext.Provider value={ notes }>
+		<ScaleNoteContext.Provider value={{ notes, rootNote }}>
 			<ScaleOptionsContext.Provider value={ scaleOptionsValue }>
 				{ children }
 			</ScaleOptionsContext.Provider>

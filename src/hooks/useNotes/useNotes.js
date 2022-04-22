@@ -116,7 +116,7 @@ export function useNotes () {
 		styleMode,
 	} = currentState;
 
-	const { notes } = React.useMemo(() => deriveNotes({
+	const { notes, rootNote } = React.useMemo(() => deriveNotes({
 		keyRoot,
 		patternId,
 		degreeIndex: degree,
@@ -164,6 +164,7 @@ export function useNotes () {
 		notes,
 		patternId,
 		patternOptions,
+		rootNote,
 		setDegree,
 		setKeyRoot,
 		setPatternId,

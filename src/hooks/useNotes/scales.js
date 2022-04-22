@@ -145,7 +145,6 @@ export const deriveNotes = ({
 	const keySign = (KEY_DEFINITION[keyRoot].flat === true)
 		? KEY_SIGN.FLAT
 		: KEY_SIGN.SHARP;
-
 	const twelveNoteDescription = ENHARMONIC_LABEL[keySign];
 	const pattern = PATTERN_TYPE[patternId];
 
@@ -173,6 +172,7 @@ export const deriveNotes = ({
 		notes: new Map(
 			notes.map(definition => ([ definition.note, definition ]))
 		),
+		rootNote,
 		// TODO: is this used?
 		// degrees: new Map([
 		// 	[ 0, {
