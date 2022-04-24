@@ -1,4 +1,3 @@
-import React from 'react';
 import { TUNING } from '../../constants';
 import ToggleButtons from '../ToggleButtons';
 
@@ -10,13 +9,16 @@ function TuningSelector ({ tuningKey, setTuningKey }) {
 	const handleToggle = updatedTuningKey => setTuningKey(updatedTuningKey);
 
 	return (
-		<ToggleButtons
-			className='fret-spacing-selector'
-			options={tuningOptions}
-			value={tuningKey}
-			handleToggle={handleToggle}
-			ariaLabel="Tuning"
-		/>
+		<>
+			Tuning
+			<ToggleButtons
+				className='fret-spacing-selector'
+				options={tuningOptions}
+				value={tuningKey}
+				handleToggle={handleToggle}
+				ariaLabel="Tuning"
+			/>
+		</>
 	);
 }
 

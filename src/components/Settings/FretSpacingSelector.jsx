@@ -12,13 +12,16 @@ function FretSpacingSelector ({ fretSpacing
 	const handleToggle = updatedFretSpacing => setFretSpacing(updatedFretSpacing);
 
 	return (
-		<ToggleButtons
-			className='fret-spacing-selector'
-			options={fretSpacingOptions}
-			value={fretSpacing}
-			handleToggle={handleToggle}
-			ariaLabel="Fret Spacing"
-		/>
+		<>
+			Fret spacing
+			<ToggleButtons
+				className='fret-spacing-selector'
+				options={fretSpacingOptions}
+				value={fretSpacing}
+				handleToggle={handleToggle}
+				ariaLabel="Fret Spacing"
+			/>
+		</>
 	);
 }
 
