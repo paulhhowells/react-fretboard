@@ -3,11 +3,13 @@ import { useSettingsContext } from '../context/SettingsContext';
 import { useFretboard } from '../hooks';
 import Notes from './Notes';
 import Fretboard from './Fretboard';
+import CagedUnderlay from './CagedUnderlay';
 
 export default function Neck () {
 	// numberOfFrets includes the nut as fret 0, so for 1 nut + 24 frets use 25.
 	const {
 		fretSpacing,
+		isCagedVisible,
 		noteLabelling,
 		numberOfFrets,
 		numberOfStrings,
@@ -30,6 +32,20 @@ export default function Neck () {
 				numberOfStrings={numberOfStrings}
 				tuning={tuning}
 			/>
+			{
+				isCagedVisible
+					? (
+						<CagedUnderlay
+							calculateFretX={calculateFretX}
+							fretboardHeight={fretboardHeight}
+							fretboardWidth={fretboardWidth}
+							numberOfFrets={numberOfFrets}
+							numberOfStrings={numberOfStrings}
+							tuning={tuning}
+						/>
+					)
+					: null
+			}
 			<Notes
 				numberOfFrets={numberOfFrets}
 				calculateFretX={calculateFretX}

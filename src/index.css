@@ -37,6 +37,7 @@ body {
 .row {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 .row > div {
 	padding: 0.25em;

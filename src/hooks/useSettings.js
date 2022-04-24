@@ -10,6 +10,7 @@ export function useSettings () {
 		id: 'settings',
 		defaultState: {
 			fretSpacing: FRET_SPACING.EVEN,
+			isCagedVisible: false,
 			noteLabelling: NOTE_LABELLING_OPTIONS[0].key,
 
 			// numberOfFrets includes the nut as fret 0, so for 1 nut + 24 frets use 25.
@@ -20,6 +21,7 @@ export function useSettings () {
 		}
 	});
 
+	const setCagedVisibility = isCagedVisible => persistState('isCagedVisible', isCagedVisible);
 	const setFretSpacing = fretSpacing => persistState('fretSpacing', fretSpacing);
 	const setNoteLabelling = noteLabelling => persistState('noteLabelling', noteLabelling);
 	const setNumberOfFrets = numberOfFrets => persistState('numberOfFrets', numberOfFrets);
@@ -32,14 +34,17 @@ export function useSettings () {
 		numberOfFrets,
 		numberOfStrings,
 		tuningKey,
+		isCagedVisible,
 	 } = currentState;
 	const tuning = TUNING[tuningKey];
 
 	return {
 		fretSpacing,
+		isCagedVisible,
 		noteLabelling,
 		numberOfFrets,
 		numberOfStrings,
+		setCagedVisibility,
 		setFretSpacing,
 		setNoteLabelling,
 		setNumberOfFrets,
@@ -47,5 +52,5 @@ export function useSettings () {
 		setTuningKey,
 		tuning,
 		tuningKey,
-	 };
+	};
 }

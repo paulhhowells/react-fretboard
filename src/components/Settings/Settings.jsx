@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useSettingsContext } from '../../context/SettingsContext';
 import TuningSelector from './TuningSelector';
 import FretSpacingSelector from './FretSpacingSelector';
+import CagedUnderlaySelector from './CagedUnderlaySelector';
 import './settings.css';
 
 export default function Settings ({ children }) {
@@ -21,6 +22,7 @@ export default function Settings ({ children }) {
 	const {
 		fretSpacing, setFretSpacing,
 		tuningKey, setTuningKey,
+		isCagedVisible, setCagedVisibility,
 	} = useSettingsContext();
 
 	return (
@@ -45,6 +47,13 @@ export default function Settings ({ children }) {
 						<FretSpacingSelector
 							fretSpacing={fretSpacing}
 							setFretSpacing={setFretSpacing}
+						/>
+					</div>
+					<div className='row'>
+						<CagedUnderlaySelector
+							isCagedVisible={isCagedVisible}
+							setCagedVisibility={setCagedVisibility}
+							tuningKey={tuningKey}
 						/>
 					</div>
 					{/*

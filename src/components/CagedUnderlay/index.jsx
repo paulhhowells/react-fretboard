@@ -14,6 +14,11 @@ export default function CagedUnderlay ({
 	tuning,
 }) {
 	const { rootNote } = useScaleNotes();
+	const tuningChordShapes = CHORD_SHAPE[tuning.id];
+
+	if (!tuningChordShapes) {
+		return null;
+	}
 
 	// List the positions on each string
 	// where the rootNote may be found.
@@ -23,7 +28,7 @@ export default function CagedUnderlay ({
 	]));
 
 	const chordShapes = getChordShapes({
-		chords: CHORD_SHAPE[tuning.id],
+		chords: tuningChordShapes,
 		calculateFretX,
 		rootNote,
 		rootPositions,

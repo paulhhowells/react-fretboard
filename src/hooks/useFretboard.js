@@ -15,12 +15,19 @@ export const useFretboard = ({
 	numberOfStrings,
 }) => {
 	// Calculate fret positions using the Rule Of Eighteen in case they are needed.
-	const ruleOfEighteen = React.useMemo(() => deriveRuleOfEighteenFretPositions(numberOfFrets), [ numberOfFrets ]);
+	// Add on a safety margin for chord shapes whose root notes start on
+	// a fret that is <= numberOfFrets but whose other notes are on frets
+	// that are greater than the numberOfFrets.
+	// 12 is clearly more than is needed but this is very cheap so
+	// save time finding the smallest number.
+	const chordShapeMargin = 12;
+	const ruleOfEighteen = React.useMemo(() => deriveRuleOfEighteenFretPositions(numberOfFrets + chordShapeMargin), [ numberOfFrets ]);
 
 	const calculateFretX = React.useCallback(
 		position => {
+			// TODO simplify
 			if (fretSpacing === FRET_SPACING.RULE_OF_EIGHTEEN) {
-				return ruleOfEighteen[position];
+				return (position >= 0) ? ruleOfEighteen[position] : position * FRET_TO_FRET_HORIZONTAL_OFFSET;
 			} else {
 				return position * FRET_TO_FRET_HORIZONTAL_OFFSET;
 			}
@@ -34,7 +41,7 @@ export const useFretboard = ({
 			const fretboardPadding = FRETBOARD_LEFT_PAD + FRETBOARD_RIGHT_PAD;
 			const fretboardWidth = Math.ceil(
 				(fretSpacing === FRET_SPACING.RULE_OF_EIGHTEEN)
-					? fretboardPadding + ruleOfEighteen[ruleOfEighteen.length - 1]
+					? fretboardPadding + ruleOfEighteen[ruleOfEighteen.length - (chordShapeMargin + 2)]
 					: fretboardPadding + (numberOfFrets * FRET_TO_FRET_HORIZONTAL_OFFSET)
 			);
 
