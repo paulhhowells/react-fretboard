@@ -257,31 +257,37 @@ const B = 11;
 export const TUNING = Object.freeze({
 	// Notes are listed low to high, then reversed.
 	EADGBE: {
+		id: 'EADGBE',
 		label: 'Spanish',
 		noteLabels: [ 'E', 'A', 'D', 'G', 'B', 'E' ].reverse(),
 		notes: [ E, A, D, G, B, E ].reverse()
 	},
 	E_FLAT: {
+		id: 'E_FLAT',
 		label: 'E flat',
 		noteLabels: [ 'E♭', 'A♭', 'D♭', 'G♭', 'B♭', 'E♭' ].reverse(),
 		notes: [ Eb, Ab, Db, Gb, Bb, Eb ].reverse()
 	},
 	DADGBE: {
+		id: 'DADGBE',
 		label: 'Drop D',
 		noteLabels: [ 'D', 'A', 'D', 'G', 'B', 'E' ].reverse(),
 		notes: [ D, A, D, G, B, E ].reverse()
 	},
 	DADGBD: {
+		id: 'DADGBD',
 		label: 'Double Drop D',
 		noteLabels: [ 'D', 'A', 'D', 'G', 'B', 'D' ].reverse(),
 		notes: [ D, A, D, G, B, D ].reverse()
 	},
 	DADGAD: {
+		id: 'DADGAD',
 		label: 'DADGAD',
 		noteLabels: [ 'D', 'A', 'D', 'G', 'A', 'D' ].reverse(),
 		notes: [ D, A, D, G, A, D ].reverse()
 	},
 	CEGACE: {
+		id: 'CEGACE',
 		label: 'C6',
 		noteLabels: [ 'C', 'E', 'G', 'A', 'C', 'E' ].reverse(),
 		notes: [ C, E, G, A, C, E ].reverse()
