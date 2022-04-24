@@ -49,7 +49,7 @@ function noteReducer (state, action) {
 				...state,
 				degree: action.payload.degree,
 			};
-		case ACTION_TYPE.SET_STYLE_MODE:
+		case ACTION_TYPE.SET_STYLE_MODE: {
 			const { styleMode } = action.payload;
 			const { degree, patternId } = state;
 			const newState = {
@@ -69,6 +69,7 @@ function noteReducer (state, action) {
 			}
 
 			return newState;
+		}
 		default:
 			throw new Error('noteReducer action type not found: ' + JSON.stringify(action));
 	}
