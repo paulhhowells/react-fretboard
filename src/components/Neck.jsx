@@ -23,11 +23,11 @@ export default function Neck () {
 			style={{ width: fretboardWidth * 2, height: 'auto', margin: '1rem' }}
 		>
 			<Fretboard
-				fretboardWidth={fretboardWidth}
+				calculateFretX={calculateFretX}
 				fretboardHeight={fretboardHeight}
+				fretboardWidth={fretboardWidth}
 				numberOfFrets={numberOfFrets}
 				numberOfStrings={numberOfStrings}
-				calculateFretX={calculateFretX}
 				tuning={tuning}
 			/>
 			<Notes
