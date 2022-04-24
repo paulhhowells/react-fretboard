@@ -9,8 +9,8 @@ export default function Neck () {
 	const {
 		fretSpacing,
 		noteLabelling,
-		numberOfFrets = 13,
-		numberOfStrings = 6,
+		numberOfFrets,
+		numberOfStrings,
 		tuning,
 	} = useSettingsContext();
 
