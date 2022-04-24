@@ -1,4 +1,3 @@
-import React from 'react';
 import { FRET_SPACING } from '../../constants';
 import ToggleButtons from '../ToggleButtons';
 

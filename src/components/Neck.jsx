@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSettingsContext } from '../context/SettingsContext';
 import { useFretboard } from '../hooks';
 import Notes from './Notes';

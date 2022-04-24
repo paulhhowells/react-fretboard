@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { NoteProvider } from '../../context/ScaleContext';
 import { SettingsProvider } from '../../context/SettingsContext';
 import ControlPlate from '../ControlPlate';
